@@ -84,7 +84,7 @@ export const PROJECTS = [
     client: 'Loewe',
     tag: 'Creative Direction',
     cats: ['direction'],
-    cover: ['images/loewe_phone_6.jpg', 2000, 1647],
+    cover: ['images/loewe_phone_8.jpg', 2000, 1647],
     images: [
       ['images/loewe_phone_1.jpg', 2000, 1647],
       ['images/loewe_phone_2.jpg', 2000, 1647],
