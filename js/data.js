@@ -188,6 +188,7 @@ export const PROJECTS = [
     client: 'Coperni — Printemps Paris',
     tag: 'Production, Set Design & Montage',
     cats: ['windows'],
+    cover: ['images/windows_display_cover.jpg', 1024, 768],
     images: [
       ['images/windows_display.jpg', 1957, 1205],
       ['images/windows_display_2.jpg', 998, 1248],
