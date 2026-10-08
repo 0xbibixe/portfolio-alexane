@@ -152,16 +152,17 @@ export const PROJECTS = [
   },
   {
     slug: 'shows-shootings',
+    layout: 'row',
     title: 'Shows & Shootings',
     client: 'Coperni',
     tag: 'Production & Coordination',
     cats: ['production'],
     year: '2023—2026',
     images: [
-      ['images/show.jpg', 1752, 1080],
-      ['images/show_3.jpg', 1115, 1400],
-      ['images/show_2.jpg', 999, 1253],
-      ['images/show_4.jpg', 863, 1079],
+      ['images/show_fw23.jpg', 998, 1248, 'Coperni Fall Winter 23 Show — Boston Dynamics Robots choreography'],
+      ['images/show_ss25.jpg', 998, 1248, 'Coperni Spring Summer 25 Show — Disneyland Paris'],
+      ['images/show_fw25.jpg', 999, 1248, 'Coperni Fall Winter 25 Show — Gamers Lan Party contest'],
+      ['images/show_ss26.jpg', 998, 1248, 'Coperni Spring Summer 26 Show'],
     ],
     desc: 'Assistante image & production pour les défilés Coperni — FW23, SS25, FW25, SS26. Coordination de shootings, post-production.',
     credits: [

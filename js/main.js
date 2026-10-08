@@ -1,4 +1,4 @@
-import { PROJECTS, CATEGORIES } from './data.js?v=24';
+import { PROJECTS, CATEGORIES } from './data.js?v=25';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -114,6 +114,21 @@ function buildGallery(images, title) {
   return gallery;
 }
 
+function buildRow(images, title) {
+  const row = el('div', { class: 'p-row' });
+  images.forEach((image, i) => {
+    const [season, detail] = (image[3] ?? '').split(' — ');
+    row.append(el('figure', {}, [
+      img(image, `${title} — ${season ?? i + 1}`, i === 0),
+      el('figcaption', {}, [
+        el('span', { text: season ?? '' }),
+        ...(detail ? [el('br'), el('span', { class: 'mute', text: detail })] : []),
+      ]),
+    ]));
+  });
+  return row;
+}
+
 function buildProject(index) {
   const p = PROJECTS[index];
 
@@ -128,7 +143,7 @@ function buildProject(index) {
 
   return [
     el('div', { class: 'p-meta' }, [tagcol, el('p', { class: 'desc', text: p.desc }), credits]),
-    buildGallery(p.images, p.title),
+    p.layout === 'row' ? buildRow(p.images, p.title) : buildGallery(p.images, p.title),
   ];
 }
 
@@ -159,7 +174,7 @@ function openProject(slug) {
       revealObserver.unobserve(e.target);
     });
   }, { root: overlay, rootMargin: '0px 0px -8% 0px' });
-  inner.querySelectorAll('.p-gallery img').forEach((im) => revealObserver.observe(im));
+  inner.querySelectorAll('.p-gallery img, .p-row img').forEach((im) => revealObserver.observe(im));
 
   if (!wasOpen) {
     overlay.hidden = false;
