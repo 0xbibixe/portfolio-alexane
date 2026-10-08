@@ -130,6 +130,7 @@ export const PROJECTS = [
     client: 'Blurry Papers',
     tag: 'Creative Direction & 3D Render',
     cats: ['direction', '3d'],
+    cover: ['images/blurry_cover_selfie.jpg', 1422, 796],
     images: [
       ['images/blurry_cover_white.jpg', 1080, 686],
       ['images/blurry_2.jpg', 1422, 1600],
