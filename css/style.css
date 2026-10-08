@@ -244,10 +244,10 @@ main { padding: clamp(60px, 12vh, 140px) var(--gutter) 140px; }
 
 .p-gallery { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gutter); }
 .p-gallery figure { margin: 0; overflow: hidden; background: #111; }
-.g-full { grid-column: 1 / 13; }
-.g-solo { grid-column: 4 / 10; }
-.g-pair-a { grid-column: 1 / 7; }
-.g-pair-b { grid-column: 7 / 13; }
+.g-full { grid-column: 3 / 11; }
+.g-solo { grid-column: 5 / 9; }
+.g-pair-a { grid-column: 3 / 7; }
+.g-pair-b { grid-column: 7 / 11; }
 
 .p-gallery img { width: 100%; height: auto; opacity: 0; transform: scale(1.04); transition: opacity 1s var(--ease), transform 1.6s var(--ease); }
 .p-gallery img.is-seen { opacity: 1; transform: none; }
