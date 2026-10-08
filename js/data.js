@@ -147,7 +147,7 @@ export const PROJECTS = [
     title: 'Shows & Shootings',
     client: 'Coperni',
     tag: 'Production & Coordination',
-    cats: ['production', 'windows'],
+    cats: ['production'],
     year: '2023—2026',
     images: [
       ['images/show.jpg', 1752, 1080],
@@ -155,11 +155,10 @@ export const PROJECTS = [
       ['images/show_2.jpg', 999, 1253],
       ['images/show_4.jpg', 863, 1079],
     ],
-    desc: 'Assistante image & production pour les défilés Coperni — FW23, SS25, FW25, SS26. Coordination de shootings, post-production, et mise en scène des vitrines Printemps Paris.',
+    desc: 'Assistante image & production pour les défilés Coperni — FW23, SS25, FW25, SS26. Coordination de shootings, post-production.',
     credits: [
       ['Défilés', 'FW23 — SS25 — FW25 — SS26'],
       ['Production', 'Production & Post-Production'],
-      ['Windows Display', 'Printemps Paris'],
     ],
   },
   {
@@ -181,6 +180,26 @@ export const PROJECTS = [
       ['Print', 'AI-Generated (DALL·E)'],
       ['Peint à la main', 'Gaspar Willmann'],
       ['Porté par', 'Kylie Jenner'],
+    ],
+  },
+  {
+    slug: 'windows-display',
+    title: 'Windows Display',
+    client: 'Coperni — Printemps Paris',
+    tag: 'Production, Set Design & Montage',
+    cats: ['windows'],
+    images: [
+      ['images/windows_display.jpg', 1957, 1205],
+      ['images/windows_display_2.jpg', 998, 1248],
+      ['images/windows_display_3.jpg', 998, 1248],
+      ['images/windows_display_4.jpg', 998, 1248],
+      ['images/windows_display_5.jpg', 998, 1248],
+    ],
+    desc: 'Vitrines Disney × Coperni au Printemps Paris. Production, scénographie et montage de quatre vitrines.',
+    credits: [
+      ['Lieu', 'Printemps Paris'],
+      ['Collaboration', 'Disney × Coperni'],
+      ['Mission', 'Production, Set Design & Montage'],
     ],
   },
 ];
