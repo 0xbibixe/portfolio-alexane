@@ -112,7 +112,7 @@ main { padding: clamp(60px, 12vh, 140px) var(--gutter) 140px; }
 }
 
 .idx-item .frame { overflow: hidden; background: #111; }
-.idx-item img { width: 100%; aspect-ratio: 16 / 10; object-fit: contain; transition: filter 0.5s, transform 1.2s var(--ease); }
+.idx-item img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: filter 0.5s, transform 1.2s var(--ease); }
 .idx-item:hover img { transform: scale(1.03); }
 
 .idx-cap {
