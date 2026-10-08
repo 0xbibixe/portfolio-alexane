@@ -143,13 +143,12 @@ function buildProject(index) {
   p.credits.forEach(([role, name]) => credits.append(el('dt', { text: role }), el('dd', { text: name })));
 
   const tagcol = el('div', { class: 'tagcol' }, [
-    el('p', { class: 'cap', text: p.tag }),
-    el('p', { class: 'cap', text: [p.client, p.year].filter(Boolean).join(' — ') }),
+    el('h1', { class: 'p-title', id: 'p-title', text: p.title }),
+    el('p', { class: 'mute', text: [p.client, p.year].filter(Boolean).join(' — ') }),
+    el('p', { class: 'mute', text: p.tag }),
   ]);
-  tagcol.lastChild.style.color = 'var(--mute)';
 
   return [
-    el('h1', { class: 'p-title', id: 'p-title', text: p.title }),
     el('div', { class: 'p-meta' }, [tagcol, el('p', { class: 'desc', text: p.desc }), credits]),
     buildGallery(p.images, p.title),
     el('a', { class: 'p-next', href: `#p/${next.slug}` }, [
