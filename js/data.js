@@ -158,6 +158,7 @@ export const PROJECTS = [
     tag: 'Production & Coordination',
     cats: ['production'],
     year: '2023—2026',
+    cover: ['images/show_cover.jpg', 1500, 1200],
     images: [
       ['images/show_fw23.jpg', 998, 1248, 'Coperni Fall Winter 23 Show — Boston Dynamics Robots choreography'],
       ['images/show_ss25.jpg', 998, 1248, 'Coperni Spring Summer 25 Show — Disneyland Paris'],
