@@ -1,7 +1,7 @@
-import { PROJECTS, CATEGORIES } from './data.js';
+import { PROJECTS, CATEGORIES } from './data.js?v=3';
 
-const VIEWS = ['work', 'index', 'info'];
-const WORK_SLOTS = 9;
+const VIEWS = ['index', 'info'];
+const HOME = 'index';
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -32,7 +32,7 @@ function img([src, w, h], alt, eager = false) {
 }
 
 /* ── State ─────────────────────────────────────────────── */
-const state = { view: 'work', filter: 'all', lastTrigger: null };
+const state = { view: HOME, filter: 'all', lastTrigger: null };
 
 /* ── Wordmark: scale text to fill header width ─────────── */
 function fitWordmark() {
@@ -43,28 +43,13 @@ function fitWordmark() {
   text.style.fontSize = `${Math.floor(100 * ratio * 1000) / 1000}px`;
 }
 
-/* ── Render: WORK (editorial) ──────────────────────────── */
-function renderWork() {
-  const root = $('#view-work');
-  PROJECTS.forEach((p, i) => {
-    const a = el('a', { class: 'work-item', href: `#p/${p.slug}`, 'data-cats': p.cats.join(' ') }, [
-      el('div', { class: 'frame' }, [img(p.images[0], p.title, i < 2)]),
-      el('div', { class: 'work-cap cap' }, [
-        el('span', { class: 'title', text: p.title }),
-        el('span', { class: 'meta', text: p.tag }),
-      ]),
-    ]);
-    root.append(a);
-  });
-}
-
 /* ── Render: INDEX (numbered grid) ─────────────────────── */
 function renderIndex() {
   const root = $('#view-index');
   PROJECTS.forEach((p, i) => {
     root.append(
       el('a', { class: 'idx-item', href: `#p/${p.slug}`, 'data-cats': p.cats.join(' ') }, [
-        el('div', { class: 'frame' }, [img(p.images[0], p.title)]),
+        el('div', { class: 'frame' }, [img(p.cover ?? p.images[0], p.title, i < 3)]),
         el('div', { class: 'idx-cap' }, [
           el('span', { class: 'num', text: pad(i) }),
           el('span', {}, [
@@ -95,22 +80,16 @@ function applyFilter(id) {
     b.setAttribute('aria-pressed', String(b.dataset.filter === id));
   });
 
-  ['#view-work .work-item', '#view-index .idx-item'].forEach((sel) => {
-    let visible = 0;
-    document.querySelectorAll(sel).forEach((item) => {
-      const match = id === 'all' || item.dataset.cats.split(' ').includes(id);
-      item.classList.toggle('is-out', !match);
-      item.classList.remove('is-in');
-      if (!match) return;
-      void item.offsetWidth; // restart entry animation
-      item.classList.add('is-in');
-      item.style.animationDelay = `${Math.min(visible, 6) * 60}ms`;
-      if (item.classList.contains('work-item')) {
-        item.className = item.className.replace(/\bl-\d\b/g, '').trim();
-        item.classList.add(`l-${visible % WORK_SLOTS}`);
-      }
-      visible += 1;
-    });
+  let visible = 0;
+  document.querySelectorAll('#view-index .idx-item').forEach((item) => {
+    const match = id === 'all' || item.dataset.cats.split(' ').includes(id);
+    item.classList.toggle('is-out', !match);
+    item.classList.remove('is-in');
+    if (!match) return;
+    void item.offsetWidth; // restart entry animation
+    item.classList.add('is-in');
+    item.style.animationDelay = `${Math.min(visible, 6) * 60}ms`;
+    visible += 1;
   });
 }
 
@@ -137,7 +116,6 @@ function buildGallery(images, title) {
 
 function buildProject(index) {
   const p = PROJECTS[index];
-  const next = PROJECTS[(index + 1) % PROJECTS.length];
 
   const credits = el('dl', { class: 'credits' });
   p.credits.forEach(([role, name]) => credits.append(el('dt', { text: role }), el('dd', { text: name })));
@@ -151,10 +129,6 @@ function buildProject(index) {
   return [
     el('div', { class: 'p-meta' }, [tagcol, el('p', { class: 'desc', text: p.desc }), credits]),
     buildGallery(p.images, p.title),
-    el('a', { class: 'p-next', href: `#p/${next.slug}` }, [
-      el('span', { class: 'cap', text: 'Next project' }),
-      el('span', { class: 'nt', text: next.title }),
-    ]),
   ];
 }
 
@@ -165,7 +139,7 @@ const CLOSE_MS = 950; // matches .project clip-path transition
 function openProject(slug) {
   const index = PROJECTS.findIndex((p) => p.slug === slug);
   if (index < 0) {
-    location.hash = '#work';
+    location.hash = `#${HOME}`;
     return;
   }
   const overlay = $('#project');
@@ -230,7 +204,7 @@ function route() {
     return;
   }
   closeProject();
-  const view = VIEWS.includes(hash) ? hash : 'work';
+  const view = VIEWS.includes(hash) ? hash : HOME;
   if (view !== state.view || !document.querySelector('.nav a.is-active')) {
     showView(view);
     window.scrollTo({ top: 0 });
@@ -240,7 +214,6 @@ function route() {
 }
 
 /* ── Init ──────────────────────────────────────────────── */
-renderWork();
 renderIndex();
 renderFilterbar();
 applyFilter('all');

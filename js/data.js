@@ -6,7 +6,7 @@ export const CATEGORIES = [
   { id: '3d', label: '3D' },
   { id: 'image', label: 'Image Making' },
   { id: 'production', label: 'Production' },
-  { id: 'communication', label: 'Communication' },
+  { id: 'windows', label: 'Windows Display' },
 ];
 
 export const PROJECTS = [
@@ -23,9 +23,9 @@ export const PROJECTS = [
       ['images/coperni_resort26_3.jpg', 1600, 1067],
       ['images/coperni_resort26_4.jpg', 768, 1152],
     ],
-    desc: 'Campagne marketing Resort 26 pour Coperni, photographiée par Sam Penn. Un univers conceptuel autour du spa et du bien-être, développé en collaboration étroite avec la direction créative de la maison.',
+    desc: 'Campagne marketing Resort 26 pour Coperni, photographiée par Sam Penn. Un univers conceptuel autour du spa et du bien-être, développé en collaboration étroite avec la creative direction de la maison.',
     credits: [
-      ['Direction créative', 'Sébastien Meyer'],
+      ['Creative Direction', 'Sébastien Meyer'],
       ['Assistante', 'Alexane Vitte'],
       ['Photographe', 'Sam Penn'],
       ['Styling', 'Helena Tejedor'],
@@ -49,7 +49,7 @@ export const PROJECTS = [
     ],
     desc: 'Assets marketing Automne-Hiver 25 pour Coperni, photographiés par Gorka Postigo. Concept minimaliste — chambre avec props technologiques, lumière chaude, intérieur épuré.',
     credits: [
-      ['Direction créative', 'Sébastien Meyer'],
+      ['Creative Direction', 'Sébastien Meyer'],
       ['Assistante', 'Alexane Vitte'],
       ['Photographe', 'Gorka Postigo'],
       ['Styling', 'Helena Tejedor'],
@@ -70,7 +70,7 @@ export const PROJECTS = [
     ],
     desc: "Éditorial pour Beau Magazine fusionnant photographie et CGI. Une réflexion sur la durabilité dans l'image de mode — des décors 3D en open source pour abolir la production physique.",
     credits: [
-      ['Direction créative', 'Alexane Vitte, Zishu Wang, Diane Serfati'],
+      ['Creative Direction', 'Alexane Vitte, Zishu Wang, Diane Serfati'],
       ['Photographe', 'Zishu Wang'],
       ['Styling', 'Diane Serfati'],
       ['3D Set Design', 'Alexane Vitte'],
@@ -93,7 +93,7 @@ export const PROJECTS = [
     ],
     desc: "Concept éditorial pour Loewe — Exit 01 : Vuelve. Une histoire d'amour à la manière d'Almodóvar, inspirée de « Femmes au bord de la crise de nerfs » (1988).",
     credits: [
-      ['Direction créative', 'Isabel Guedan, Alexane Vitte, Violette Prenant Corric, Zishu Wang'],
+      ['Creative Direction', 'Isabel Guedan, Alexane Vitte, Violette Prenant Corric, Zishu Wang'],
       ['Photographe', 'Arturo Ruiz'],
       ['Styling', 'Violette Prenant Corric'],
       ['Modèles', 'Mariana Salaru, Rose Dusser, Auguste P.'],
@@ -111,7 +111,7 @@ export const PROJECTS = [
       ['images/acne_3.jpg', 1418, 1600],
     ],
     desc: 'Concept de campagne pour Acne Studios — un roman graphique visuel. Grille Instagram traitée comme une grille de comics, inspirée de la collection SS24. Composition en fondu enchaîné.',
-    credits: [['Direction créative & Image Making', 'Alexane Vitte']],
+    credits: [['Creative Direction & Image Making', 'Alexane Vitte']],
   },
   {
     slug: 'blurry-papers',
@@ -119,6 +119,7 @@ export const PROJECTS = [
     client: 'Blurry Papers',
     tag: 'Creative Direction & 3D Render',
     cats: ['direction', '3d'],
+    cover: ['images/blurry_cover.jpg', 1423, 800],
     images: [
       ['images/blurry_papers.jpg', 686, 1080],
       ['images/blurry_2.jpg', 1422, 1600],
@@ -126,27 +127,8 @@ export const PROJECTS = [
     ],
     desc: "Éditorial 3D pour Blurry Papers Magazine — « What's in a girl's bag ? ». Contenu entièrement conçu en 3D, set minimaliste et intérieur.",
     credits: [
-      ['Direction créative', 'Alexane Vitte & Diane Serfati'],
+      ['Creative Direction', 'Alexane Vitte & Diane Serfati'],
       ['3D Designer', 'Alexane Vitte'],
-    ],
-  },
-  {
-    slug: 'socials-presse',
-    title: 'Socials & Presse',
-    client: 'Coperni',
-    tag: 'Brand Image & Communication',
-    cats: ['communication'],
-    year: '2023—2026',
-    images: [
-      ['images/socials.jpg', 1732, 1063],
-      ['images/socials_2.jpg', 775, 1600],
-      ['images/socials_3.jpg', 739, 1600],
-    ],
-    desc: 'Gestion complète du roll-out social chez Coperni — posts & captions, développement de contenu avec des influenceurs, design graphique, montage vidéo et création de contenu.',
-    credits: [
-      ['Social Roll-Out', 'Posts & Captions'],
-      ['Presse', 'Développement contenu'],
-      ['Graphic Design', 'Montage vidéo'],
     ],
   },
   {
@@ -154,7 +136,7 @@ export const PROJECTS = [
     title: 'Shows & Shootings',
     client: 'Coperni',
     tag: 'Production & Coordination',
-    cats: ['production'],
+    cats: ['production', 'windows'],
     year: '2023—2026',
     images: [
       ['images/show.jpg', 1752, 1080],
