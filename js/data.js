@@ -85,6 +85,11 @@ export const PROJECTS = [
     tag: 'Creative Direction',
     cats: ['direction'],
     images: [
+      ['images/loewe_phone_1.jpg', 2000, 1647],
+      ['images/loewe_phone_2.jpg', 2000, 1647],
+      ['images/loewe_phone_3.jpg', 2000, 1647],
+      ['images/loewe_phone_4.jpg', 2000, 1647],
+      ['images/loewe_phone_5.jpg', 1333, 2000],
       ['images/loewe_editorial.jpg', 1753, 1080],
       ['images/loewe_2.jpg', 1322, 1089],
       ['images/loewe_3.jpg', 1374, 1132],
