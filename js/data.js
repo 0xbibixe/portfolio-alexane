@@ -17,6 +17,7 @@ export const PROJECTS = [
     tag: 'Creative Direction',
     cats: ['direction'],
     year: '2025',
+    rows: [[0], [1, 2, 3, 4], [5, 6, 7, 8]],
     images: [
       ['images/resort26_a.jpg', 2000, 1333],
       ['images/resort26_b.jpg', 1333, 2000],
@@ -46,6 +47,7 @@ export const PROJECTS = [
     tag: 'Creative Direction',
     cats: ['direction'],
     year: '2025',
+    rows: [[0], [1, 2, 3], [4, 5, 6]],
     images: [
       ['images/fw25_a.jpg', 2000, 1499],
       ['images/fw25_b.jpg', 1333, 2000],
@@ -71,6 +73,7 @@ export const PROJECTS = [
     client: 'Beau Magazine',
     tag: 'Creative Direction & 3D Render',
     cats: ['direction', '3d'],
+    rows: [[0], [1, 2]],
     images: [
       ['images/beau_magazine.jpg', 1756, 1080],
       ['images/beau_magazine_2.jpg', 1280, 1600],
@@ -92,6 +95,7 @@ export const PROJECTS = [
     client: 'Loewe',
     tag: 'Creative Direction',
     cats: ['direction'],
+    rows: [[0], [1, 2, 3], [4, 5, 6, 7], [8, 9]],
     images: [
       ['images/loewe_phone_8.jpg', 2000, 1647],
       ['images/loewe_phone_1.jpg', 2000, 1647],
@@ -118,6 +122,7 @@ export const PROJECTS = [
     client: 'Acne Studios',
     tag: 'Creative Direction & Image Making',
     cats: ['direction', 'image'],
+    rows: [[0], [1], [2, 3, 4], [5], [6, 7]],
     images: [
       ['images/acne_diaries_cover.jpg', 2000, 1250],
       ['images/acne_diaries.jpg', 2000, 829],
@@ -125,7 +130,6 @@ export const PROJECTS = [
       ['images/acne_diaries_3.jpg', 1080, 1350],
       ['images/acne_diaries_5.jpg', 1080, 1350],
       ['images/acne_diaries_4.jpg', 1080, 1350],
-      ['images/acne_collage.jpg', 1751, 1080],
       ['images/acne_2.jpg', 1286, 1600],
       ['images/acne_3.jpg', 1418, 1600],
     ],
@@ -139,6 +143,7 @@ export const PROJECTS = [
     tag: 'Creative Direction & 3D Render',
     cats: ['direction', '3d'],
     cover: ['images/blurry_cover_selfie.jpg', 1422, 796],
+    rows: [[0], [1, 2]],
     images: [
       ['images/blurry_cover_white.jpg', 1080, 686],
       ['images/blurry_2.jpg', 1422, 1600],
@@ -152,13 +157,13 @@ export const PROJECTS = [
   },
   {
     slug: 'shows-shootings',
-    layout: 'row',
     title: 'Shows & Shootings',
     client: 'Coperni',
     tag: 'Production & Coordination',
     cats: ['production'],
     year: '2023—2026',
     cover: ['images/show_cover.jpg', 1500, 1200],
+    rows: [[0, 1, 2, 3]],
     images: [
       ['images/show_fw23.jpg', 998, 1248, 'Coperni Fall Winter 23 Show — Boston Dynamics Robots choreography'],
       ['images/show_ss25.jpg', 998, 1248, 'Coperni Spring Summer 25 Show — Disneyland Paris'],
@@ -178,6 +183,7 @@ export const PROJECTS = [
     tag: 'AI-Generated Print',
     cats: ['image'],
     year: '2023',
+    rows: [[0], [1], [2, 3]],
     images: [
       ['images/print_fw23.jpg', 1760, 1080],
       ['images/print_2.jpg', 1600, 800],
@@ -199,6 +205,7 @@ export const PROJECTS = [
     tag: 'Production, Set Design & Montage',
     cats: ['windows'],
     cover: ['images/windows_display_cover.jpg', 1024, 768],
+    rows: [[0], [1, 2, 3, 4]],
     images: [
       ['images/windows_display.jpg', 1957, 1205],
       ['images/windows_display_2.jpg', 998, 1248],
@@ -215,12 +222,12 @@ export const PROJECTS = [
   },
   {
     slug: 'brand-image-communication',
-    layout: 'row',
     title: 'Brand Image & Communication',
     client: 'Coperni',
     tag: 'Image & Production Assistant — Show role overview',
     cats: ['production'],
     year: '2023—2026',
+    rows: [[0, 1, 2, 3, 4, 5]],
     images: [
       ['images/brand_vogue_runway.jpg', 607, 899, 'Vogue Runway — Photographer brief'],
       ['images/brand_show_videos.jpg', 378, 559, 'Show Videos — Post-production coordination'],

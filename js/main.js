@@ -1,4 +1,4 @@
-import { PROJECTS, CATEGORIES } from './data.js?v=27';
+import { PROJECTS, CATEGORIES } from './data.js?v=28';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -94,39 +94,28 @@ function applyFilter(id) {
 }
 
 /* ── Project overlay ───────────────────────────────────── */
-function buildGallery(images, title) {
-  const gallery = el('div', { class: 'p-gallery' });
-  const fig = (image, cls, i) => el('figure', { class: cls }, [img(image, `${title} — image ${i + 1}`, i === 0)]);
-
-  gallery.append(fig(images[0], 'g-full', 0));
-  for (let i = 1; i < images.length; i += 1) {
-    const cur = images[i];
-    const next = images[i + 1];
-    if (isLandscape(cur)) {
-      gallery.append(fig(cur, 'g-full', i));
-    } else if (next && !isLandscape(next)) {
-      gallery.append(fig(cur, 'g-pair-a', i), fig(next, 'g-pair-b', i + 1));
-      i += 1;
-    } else {
-      gallery.append(fig(cur, 'g-solo', i));
-    }
-  }
-  return gallery;
-}
-
-function buildRow(images, title) {
-  const row = el('div', { class: 'p-row' });
-  images.forEach((image, i) => {
-    const [season, detail] = (image[3] ?? '').split(' — ');
-    row.append(el('figure', { style: `--ar: ${(image[1] / image[2]).toFixed(4)}` }, [
-      img(image, `${title} — ${season ?? i + 1}`, i === 0),
-      el('figcaption', {}, [
-        el('span', { text: season ?? '' }),
-        ...(detail ? [el('br'), el('span', { class: 'mute', text: detail })] : []),
-      ]),
-    ]));
-  });
-  return row;
+function buildGallery(p) {
+  const rows = p.rows ?? p.images.map((_, i) => [i]);
+  return el('div', { class: 'p-rows' }, rows.map((idx) => {
+    const imgs = idx.map((i) => p.images[i]);
+    const hasCaps = imgs.some((im) => im[3]);
+    const row = el('div', { class: `p-row${hasCaps ? ' has-caps' : ''}${imgs.length === 1 ? ' is-solo' : ''}` });
+    imgs.forEach((image, k) => {
+      const [season, detail] = (image[3] ?? '').split(' — ');
+      const fig = el('figure', { style: `--ar: ${(image[1] / image[2]).toFixed(4)}` }, [
+        img(image, `${p.title} — ${season || `image ${idx[k] + 1}`}`, idx[0] === 0),
+      ]);
+      if (imgs.length === 1) fig.style.maxWidth = `${image[1]}px`;
+      if (image[3]) {
+        fig.append(el('figcaption', {}, [
+          el('span', { text: season }),
+          ...(detail ? [el('br'), el('span', { class: 'mute', text: detail })] : []),
+        ]));
+      }
+      row.append(fig);
+    });
+    return row;
+  }));
 }
 
 function buildProject(index) {
@@ -143,7 +132,7 @@ function buildProject(index) {
 
   return [
     el('div', { class: 'p-meta' }, [tagcol, el('p', { class: 'desc', text: p.desc }), credits]),
-    p.layout === 'row' ? buildRow(p.images, p.title) : buildGallery(p.images, p.title),
+    buildGallery(p),
   ];
 }
 
@@ -174,7 +163,7 @@ function openProject(slug) {
       revealObserver.unobserve(e.target);
     });
   }, { root: overlay, rootMargin: '0px 0px -8% 0px' });
-  inner.querySelectorAll('.p-gallery img, .p-row img').forEach((im) => revealObserver.observe(im));
+  inner.querySelectorAll('.p-row img').forEach((im) => revealObserver.observe(im));
 
   if (!wasOpen) {
     overlay.hidden = false;
