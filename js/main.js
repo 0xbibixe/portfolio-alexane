@@ -1,4 +1,4 @@
-import { PROJECTS, CATEGORIES } from './data.js?v=26';
+import { PROJECTS, CATEGORIES } from './data.js?v=27';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -118,7 +118,7 @@ function buildRow(images, title) {
   const row = el('div', { class: 'p-row' });
   images.forEach((image, i) => {
     const [season, detail] = (image[3] ?? '').split(' — ');
-    row.append(el('figure', {}, [
+    row.append(el('figure', { style: `--ar: ${(image[1] / image[2]).toFixed(4)}` }, [
       img(image, `${title} — ${season ?? i + 1}`, i === 0),
       el('figcaption', {}, [
         el('span', { text: season ?? '' }),

@@ -213,4 +213,26 @@ export const PROJECTS = [
       ['Mission', 'Production, Set Design & Montage'],
     ],
   },
+  {
+    slug: 'brand-image-communication',
+    layout: 'row',
+    title: 'Brand Image & Communication',
+    client: 'Coperni',
+    tag: 'Image & Production Assistant — Show role overview',
+    cats: ['production'],
+    year: '2023—2026',
+    images: [
+      ['images/brand_vogue_runway.jpg', 607, 899, 'Vogue Runway — Photographer brief'],
+      ['images/brand_show_videos.jpg', 378, 559, 'Show Videos — Post-production coordination'],
+      ['images/brand_key_looks.jpg', 1500, 2000, 'Key Looks — Photographer brief'],
+      ['images/brand_fitting.jpg', 431, 538, 'Fitting — Post-production'],
+      ['images/brand_teaser.jpg', 719, 899, 'Teaser — Post-production'],
+      ['images/brand_boards.jpg', 674, 904, 'Boards — Post-production'],
+    ],
+    desc: "Rôle d'assistante image & production sur les défilés Coperni : briefs photographes, coordination de la post-production, fittings, teasers et boards.",
+    credits: [
+      ['Rôle', 'Image & Production Assistant'],
+      ['Collaboration', 'Coperni'],
+    ],
+  },
 ];
