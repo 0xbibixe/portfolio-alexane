@@ -47,10 +47,13 @@ export const PROJECTS = [
     cats: ['direction'],
     year: '2025',
     images: [
-      ['images/coperni_fw25.jpg', 1754, 1080],
-      ['images/coperni_fw25_2.jpg', 1537, 1152],
-      ['images/coperni_fw25_4.jpg', 864, 1152],
-      ['images/coperni_fw25_3.jpg', 864, 1152],
+      ['images/fw25_a.jpg', 2000, 1499],
+      ['images/fw25_b.jpg', 1333, 2000],
+      ['images/fw25_c.jpg', 2000, 1499],
+      ['images/fw25_d.jpg', 1499, 2000],
+      ['images/fw25_e.jpg', 1499, 2000],
+      ['images/fw25_f.jpg', 2000, 1499],
+      ['images/fw25_g.jpg', 1499, 2000],
     ],
     desc: 'Assets marketing Automne-Hiver 25 pour Coperni, photographiés par Gorka Postigo. Concept minimaliste — chambre avec props technologiques, lumière chaude, intérieur épuré.',
     credits: [
