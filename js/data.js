@@ -105,6 +105,7 @@ export const PROJECTS = [
     client: 'Acne Studios',
     tag: 'Creative Direction & Image Making',
     cats: ['direction', 'image'],
+    cover: ['images/acne_diaries_cover.jpg', 2000, 1250],
     images: [
       ['images/acne_diaries.jpg', 2000, 829],
       ['images/acne_diaries_2.jpg', 1080, 1350],
