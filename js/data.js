@@ -18,10 +18,11 @@ export const PROJECTS = [
     cats: ['direction'],
     year: '2025',
     images: [
-      ['images/coperni_resort26.jpg', 1753, 1080],
-      ['images/coperni_resort26_4.jpg', 768, 1152],
-      ['images/coperni_resort26_2.jpg', 1600, 1067],
-      ['images/coperni_resort26_3.jpg', 1600, 1067],
+      ['images/resort26_a.jpg', 2000, 1333],
+      ['images/resort26_b.jpg', 1333, 2000],
+      ['images/resort26_c.jpg', 2000, 1333],
+      ['images/resort26_d.jpg', 1333, 2000],
+      ['images/resort26_e.jpg', 2000, 1333],
     ],
     desc: 'Campagne marketing Resort 26 pour Coperni, photographiée par Sam Penn. Un univers conceptuel autour du spa et du bien-être, développé en collaboration étroite avec la creative direction de la maison.',
     credits: [
