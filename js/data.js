@@ -94,7 +94,6 @@ export const PROJECTS = [
       ['images/loewe_phone_6.jpg', 2000, 1647],
       ['images/loewe_phone_7.jpg', 1333, 2000],
       ['images/loewe_phone_8.jpg', 2000, 1647],
-      ['images/loewe_editorial.jpg', 1753, 1080],
       ['images/loewe_2.jpg', 1322, 1089],
       ['images/loewe_3.jpg', 1374, 1132],
       ['images/loewe_4.jpg', 1170, 1466],
