@@ -89,7 +89,7 @@ export const PROJECTS = [
     tag: 'Creative Direction',
     cats: ['direction'],
     year: '2025',
-    rows: [[0], [1, 2, 3], [4, 5, 6]],
+    rows: [[0], [1, 2, 3], [4, 5, 6], [7, 8], [9]],
     images: [
       ['images/fw25_a.jpg', 2000, 1499],
       ['images/fw25_b.jpg', 1333, 2000],
@@ -98,6 +98,9 @@ export const PROJECTS = [
       ['images/fw25_e.jpg', 1499, 2000],
       ['images/fw25_f.jpg', 2000, 1499],
       ['images/fw25_g.jpg', 1499, 2000],
+      ['images/fw25_h.jpg', 1500, 2000],
+      ['images/fw25_i.jpg', 2000, 1500],
+      ['images/fw25_j.jpg', 2000, 1500],
     ],
     desc: 'Assets marketing Automne-Hiver 25 pour Coperni, photographiés par Gorka Postigo. Concept minimaliste — chambre avec props technologiques, lumière chaude, intérieur épuré.',
     credits: [

@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=62';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=63';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
