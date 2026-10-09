@@ -328,6 +328,7 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   .p-row figure { flex: 1 1 100%; }
   .p-row.has-caps { gap: 20px var(--gutter); }
   .p-row.has-caps figure { flex: 1 1 calc(50% - var(--gutter)); }
+  .p-rows.has-cols .p-row figure { flex: 0 0 calc((100% - var(--gutter)) / 2); }
   .filterbar { justify-content: flex-start; }
   .badge { display: none; }
   .info-col, .info-col:first-of-type { grid-column: 1 / 13; }
