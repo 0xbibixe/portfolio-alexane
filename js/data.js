@@ -11,6 +11,25 @@ export const CATEGORIES = [
 
 export const PROJECTS = [
   {
+    slug: 'acne-diaries',
+    title: 'Acne Diaries',
+    client: 'Acne Studios',
+    tag: 'Creative Direction & Image Making',
+    cats: ['direction', 'image'],
+    rows: [[0], [1], [2, 3, 4], [5], [6]],
+    images: [
+      ['images/acne_diaries_cover.jpg', 2000, 1250],
+      ['images/acne_diaries.jpg', 2000, 829],
+      ['images/acne_diaries_2.jpg', 1080, 1350],
+      ['images/acne_diaries_3.jpg', 1080, 1350],
+      ['images/acne_diaries_5.jpg', 1080, 1350],
+      ['images/acne_diaries_4.jpg', 1080, 1350],
+      ['images/acne_2.jpg', 1286, 1600],
+    ],
+    desc: 'Concept de campagne pour Acne Studios — un roman graphique visuel. Grille Instagram traitée comme une grille de comics, inspirée de la collection SS24. Composition en fondu enchaîné.',
+    credits: [['Creative Direction & Image Making', 'Alexane Vitte']],
+  },
+  {
     slug: 'coperni-resort-26',
     title: 'Coperni Resort 26',
     client: 'Coperni',
@@ -115,25 +134,6 @@ export const PROJECTS = [
       ['Styling', 'Violette Prenant Corric'],
       ['Modèles', 'Mariana Salaru, Rose Dusser, Auguste P.'],
     ],
-  },
-  {
-    slug: 'acne-diaries',
-    title: 'Acne Diaries',
-    client: 'Acne Studios',
-    tag: 'Creative Direction & Image Making',
-    cats: ['direction', 'image'],
-    rows: [[0], [1], [2, 3, 4], [5], [6]],
-    images: [
-      ['images/acne_diaries_cover.jpg', 2000, 1250],
-      ['images/acne_diaries.jpg', 2000, 829],
-      ['images/acne_diaries_2.jpg', 1080, 1350],
-      ['images/acne_diaries_3.jpg', 1080, 1350],
-      ['images/acne_diaries_5.jpg', 1080, 1350],
-      ['images/acne_diaries_4.jpg', 1080, 1350],
-      ['images/acne_2.jpg', 1286, 1600],
-    ],
-    desc: 'Concept de campagne pour Acne Studios — un roman graphique visuel. Grille Instagram traitée comme une grille de comics, inspirée de la collection SS24. Composition en fondu enchaîné.',
-    credits: [['Creative Direction & Image Making', 'Alexane Vitte']],
   },
   {
     slug: 'blurry-papers',
