@@ -1,4 +1,4 @@
-import { PROJECTS, CATEGORIES } from './data.js?v=51';
+import { PROJECTS, CATEGORIES } from './data.js?v=52';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -237,11 +237,11 @@ const goToIndex = (smooth) => {
   const behavior = smooth && !matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto';
   document.querySelector('.site-header').scrollIntoView({ behavior });
 };
-$('#landing-arrow').addEventListener('click', (e) => {
+document.querySelectorAll('#landing-arrow, .landing-wordmark').forEach((a) => a.addEventListener('click', (e) => {
   e.preventDefault();
   if (location.hash !== `#${HOME}`) location.hash = `#${HOME}`;
   goToIndex(true);
-});
+}));
 new IntersectionObserver(([entry]) => {
   document.body.classList.toggle('on-landing', entry.intersectionRatio > 0.35);
 }, { threshold: [0, 0.35, 0.36, 1] }).observe(landing);
