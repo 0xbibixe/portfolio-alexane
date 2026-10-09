@@ -151,7 +151,7 @@ export const PROJECTS = [
     images: [
       ['images/brand_shooting_1.jpg', 863, 1079, '[1] Production — Pre Fall 23 shot by Pierre-Ange Carlotti', 'shoot-pre-fall-23'],
       ['images/brand_shooting_2.jpg', 863, 1078, '[2] Production — Resort 24 shot by Marili Andre - Espace Niemeyer', 'shoot-resort-24'],
-      ['images/brand_shooting_3.jpg', 863, 1079, '[3] Production — Pre Fall 24 shot by Theo Sion - CERN', 'shoot-pre-fall-24'],
+      ['images/shoot_prefall24_03.jpg', 1600, 2000, '[3] Production — Pre Fall 24 shot by Theo Sion - CERN', 'shoot-pre-fall-24'],
       ['images/brand_shooting_4.jpg', 431, 540, '[4] Production & Post-Production — Pre Fall 25 shot by Stuart Winecoff'],
       ['images/brand_shooting_5.jpg', 863, 1078, '[5] Assistant Production & Post-Production — RBM x Coperni campaign shot by Stuart Winecoff'],
       ['images/brand_shooting_6.jpg', 863, 1078, '[6] Production & Post-Production — Summer campaign shot by Lukasz Pukowiec'],
