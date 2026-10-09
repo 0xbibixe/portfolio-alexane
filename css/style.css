@@ -1,7 +1,7 @@
 /* ── Tokens ───────────────────────────────────────────── */
 :root {
   --bg: #050505;
-  --fg: #ff3b1f;
+  --fg: #fff8ef;
   --mute: #6e6b66;
   --line: #1f1e1c;
   --accent: #ff3b1f;
@@ -67,6 +67,8 @@ h1, h2, h3, p { margin: 0; }
   line-height: 0.8;
 }
 
+.wordmark:hover .wordmark-text { color: var(--accent); }
+
 .wordmark-text {
   display: inline-block;
   font-weight: 900;
@@ -126,6 +128,7 @@ main { padding: clamp(60px, 12vh, 140px) var(--gutter) 140px; }
 }
 .idx-cap .num { color: var(--mute); }
 .idx-cap .sub { color: var(--mute); }
+.idx-cap .t { transition: color 0.3s; }
 .idx-item:hover .t { color: var(--accent); }
 
 /* filtered-out state for both views */
@@ -235,7 +238,8 @@ main { padding: clamp(60px, 12vh, 140px) var(--gutter) 140px; }
   line-height: 1.45;
 }
 .p-meta .mute { color: var(--mute); }
-.p-title { font: inherit; }
+.p-title { font: inherit; transition: color 0.3s; }
+.p-title:hover { color: var(--accent); }
 .p-meta .tagcol { grid-column: 1 / 4; }
 .p-meta .desc { grid-column: 5 / 9; }
 .p-meta .credits { grid-column: 10 / 13; margin: 0; }
