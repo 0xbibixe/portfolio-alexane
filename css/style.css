@@ -85,7 +85,7 @@ h1, h2, h3, p { margin: 0; }
 
 .landing-arrow {
   position: absolute; z-index: 1;
-  left: 50%; bottom: clamp(28px, 6vh, 64px);
+  left: 50%; bottom: clamp(84px, 13vh, 120px);
   transform: translateX(-50%);
   padding: 14px;
   color: #fff;
@@ -96,9 +96,10 @@ h1, h2, h3, p { margin: 0; }
 .landing-arrow:hover, .landing-arrow:focus-visible { color: var(--accent); mix-blend-mode: normal; }
 @keyframes nudge { 0%, 60%, 100% { transform: translate(-50%, 0); } 30% { transform: translate(-50%, 10px); } }
 
-/* filter bar and city badge only once the landing is scrolled past */
-body.on-landing .filterbar,
+/* city badge only once the landing is scrolled past */
 body.on-landing .badge { opacity: 0; pointer-events: none; }
+/* the filter menu is part of the landing too (even when the Info view is active underneath) */
+body.on-landing:not(.is-locked) .filterbar { transform: none; opacity: 1; pointer-events: auto; }
 .badge { transition: opacity 0.4s; }
 
 /* ── Header ───────────────────────────────────────────── */

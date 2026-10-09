@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=57';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=58';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -69,9 +69,15 @@ function renderFilterbar() {
   CATEGORIES.forEach((c, i) => {
     if (i === 1) bar.append(el('span', { class: 'sep', text: '/', 'aria-hidden': 'true' }));
     const b = el('button', { type: 'button', 'data-filter': c.id, 'aria-pressed': String(c.id === state.filter), text: c.label });
-    b.addEventListener('click', () => applyFilter(c.id));
+    b.addEventListener('click', () => onFilter(c.id));
     bar.append(b);
   });
+}
+
+function onFilter(id) {
+  if (state.view !== HOME) location.hash = `#${HOME}`;
+  applyFilter(id);
+  if (document.body.classList.contains('on-landing')) goToContent(true);
 }
 
 function applyFilter(id) {
