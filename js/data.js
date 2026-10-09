@@ -122,7 +122,7 @@ export const PROJECTS = [
     client: 'Acne Studios',
     tag: 'Creative Direction & Image Making',
     cats: ['direction', 'image'],
-    rows: [[0], [1], [2, 3, 4], [5], [6, 7]],
+    rows: [[0], [1], [2, 3, 4], [5], [6]],
     images: [
       ['images/acne_diaries_cover.jpg', 2000, 1250],
       ['images/acne_diaries.jpg', 2000, 829],
@@ -131,7 +131,6 @@ export const PROJECTS = [
       ['images/acne_diaries_5.jpg', 1080, 1350],
       ['images/acne_diaries_4.jpg', 1080, 1350],
       ['images/acne_2.jpg', 1286, 1600],
-      ['images/acne_3.jpg', 1418, 1600],
     ],
     desc: 'Concept de campagne pour Acne Studios — un roman graphique visuel. Grille Instagram traitée comme une grille de comics, inspirée de la collection SS24. Composition en fondu enchaîné.',
     credits: [['Creative Direction & Image Making', 'Alexane Vitte']],
