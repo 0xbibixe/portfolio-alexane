@@ -162,7 +162,7 @@ export const PROJECTS = [
     tag: 'Shooting — Production & Post-Production',
     cats: ['production'],
     year: '2023—2025',
-    cover: ['images/brand_cover.jpg', 2000, 1500],
+    cover: ['images/brand_cover.jpg', 1890, 1063],
     rows: [[0], [1, 2, 3, 4], [5, 6, 7, 8]],
     images: [
       ['images/brand_shooting_hero.jpg', 2000, 1230, 'Production, Coordination, Post-Production'],
