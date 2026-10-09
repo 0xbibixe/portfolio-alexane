@@ -76,10 +76,12 @@ h1, h2, h3, p { margin: 0; }
   background: linear-gradient(to bottom, rgba(5,5,5,0.55), rgba(5,5,5,0) 38%, rgba(5,5,5,0) 70%, rgba(5,5,5,0.5));
   pointer-events: none;
 }
-.landing-wordmark {
+.landing-top {
   position: absolute; z-index: 1;
   top: var(--gutter); left: var(--gutter); right: var(--gutter);
 }
+.landing-top .nav a { color: var(--fg); opacity: 0.7; transition: opacity 0.3s, color 0.3s; }
+.landing-top .nav a:hover, .landing-top .nav a.is-active { opacity: 1; }
 
 .landing-arrow {
   position: absolute; z-index: 1;
@@ -100,10 +102,6 @@ body.on-landing .badge { opacity: 0; pointer-events: none; }
 .badge { transition: opacity 0.4s; }
 
 /* ── Header ───────────────────────────────────────────── */
-.site-header {
-  padding: var(--gutter) var(--gutter) 0;
-}
-
 .wordmark {
   display: block;
   overflow: hidden;
@@ -141,7 +139,7 @@ body.on-landing .badge { opacity: 0; pointer-events: none; }
 .nav a.is-active::before { content: '● '; color: var(--accent); }
 
 /* ── Views ────────────────────────────────────────────── */
-main { padding: clamp(60px, 12vh, 140px) var(--gutter) 140px; }
+main { min-height: 100vh; min-height: 100svh; padding: clamp(60px, 12vh, 140px) var(--gutter) 140px; }
 .view[hidden] { display: none; }
 
 /* dim siblings on hover (desktop pointer only) */

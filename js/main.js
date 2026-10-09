@@ -1,4 +1,4 @@
-import { PROJECTS, CATEGORIES } from './data.js?v=52';
+import { PROJECTS, CATEGORIES } from './data.js?v=53';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -189,6 +189,11 @@ function closeProject() {
 }
 
 /* ── Views & routing ───────────────────────────────────── */
+function goToContent(smooth) {
+  const behavior = smooth && !matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto';
+  $('#main').scrollIntoView({ behavior });
+}
+
 function showView(view) {
   state.view = view;
   VIEWS.forEach((v) => { $(`#view-${v}`).hidden = v !== view; });
@@ -210,8 +215,10 @@ function route() {
   closeProject();
   const view = VIEWS.includes(hash) ? hash : HOME;
   if (view !== state.view || !document.querySelector('.nav a.is-active')) {
+    const first = !document.querySelector('.nav a.is-active');
     showView(view);
-    window.scrollTo({ top: 0 });
+    if (first) window.scrollTo({ top: 0 });
+    else goToContent(false);
   } else {
     $('#filterbar').classList.toggle('is-hidden', view === 'info');
   }
@@ -233,14 +240,11 @@ document.addEventListener('keydown', (e) => {
 
 /* ── Landing: arrow scrolls to the index, UI chrome waits for it ── */
 const landing = $('#landing');
-const goToIndex = (smooth) => {
-  const behavior = smooth && !matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto';
-  document.querySelector('.site-header').scrollIntoView({ behavior });
-};
-document.querySelectorAll('#landing-arrow, .landing-wordmark').forEach((a) => a.addEventListener('click', (e) => {
+document.querySelectorAll('#landing-arrow, .landing-wordmark, .landing .nav a').forEach((a) => a.addEventListener('click', (e) => {
   e.preventDefault();
-  if (location.hash !== `#${HOME}`) location.hash = `#${HOME}`;
-  goToIndex(true);
+  const target = a.dataset.view ?? HOME;
+  if (location.hash !== `#${target}`) location.hash = `#${target}`;
+  goToContent(true);
 }));
 new IntersectionObserver(([entry]) => {
   document.body.classList.toggle('on-landing', entry.intersectionRatio > 0.35);
@@ -251,4 +255,4 @@ window.addEventListener('resize', fitWordmark);
 document.fonts.ready.then(fitWordmark);
 fitWordmark();
 route();
-if (location.hash && location.hash !== '#') goToIndex(false);
+if (location.hash && location.hash !== '#') goToContent(false);
