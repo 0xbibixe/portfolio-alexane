@@ -142,9 +142,10 @@ export const PROJECTS = [
     tag: 'Creative Direction & 3D Render',
     cats: ['direction', '3d'],
     cover: ['images/blurry_cover_selfie.jpg', 1422, 796],
-    rows: [[0], [1, 2]],
+    rows: [[0, 1], [2, 3]],
     images: [
       ['images/blurry_cover_white.jpg', 1080, 686],
+      ['images/blurry_text.jpg', 1151, 822],
       ['images/blurry_2.jpg', 1422, 1600],
       ['images/blurry_3.jpg', 1423, 1600],
     ],
