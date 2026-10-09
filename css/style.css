@@ -296,6 +296,11 @@ main { min-height: 100vh; min-height: 100svh; padding: clamp(60px, 12vh, 140px) 
 .p-row img.is-seen { opacity: 1; transform: none; }
 .p-row figcaption { padding-top: 10px; font-size: var(--small); font-weight: 500; line-height: 1.35; text-transform: uppercase; }
 .p-row figcaption .mute { color: var(--mute); text-transform: none; }
+.shoot-link { display: block; overflow: hidden; }
+.shoot-link img { transition: opacity 1s var(--ease), transform 1.2s var(--ease), filter 0.4s; }
+.shoot-link:hover img.is-seen { transform: scale(1.03); filter: brightness(0.8); }
+.view-shoot { color: var(--mute); text-transform: none; transition: color 0.3s; }
+.view-shoot:hover, .p-row figure:has(.shoot-link:hover) .view-shoot { color: var(--accent); }
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 900px) {

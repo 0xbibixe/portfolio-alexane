@@ -1,4 +1,4 @@
-import { PROJECTS, CATEGORIES } from './data.js?v=53';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=54';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -32,7 +32,7 @@ function img([src, w, h], alt, eager = false) {
 }
 
 /* ── State ─────────────────────────────────────────────── */
-const state = { view: HOME, filter: 'all', lastTrigger: null };
+const state = { view: HOME, filter: 'all', lastTrigger: null, back: null, parentScroll: null };
 
 /* ── Wordmark: scale text to fill header width ─────────── */
 function fitWordmark() {
@@ -102,14 +102,17 @@ function buildGallery(p) {
     const row = el('div', { class: `p-row${hasCaps ? ' has-caps' : ''}${imgs.length === 1 ? ' is-solo' : ''}` });
     imgs.forEach((image, k) => {
       const [season, detail] = (image[3] ?? '').split(' — ');
+      const picture = img(image, `${p.title} — ${season || `image ${idx[k] + 1}`}`, idx[0] === 0);
+      const link = image[4];
       const fig = el('figure', { style: `--ar: ${(image[1] / image[2]).toFixed(4)}` }, [
-        img(image, `${p.title} — ${season || `image ${idx[k] + 1}`}`, idx[0] === 0),
+        link ? el('a', { class: 'shoot-link', href: `#p/${link}`, 'aria-label': `${season || p.title} — voir tout le shooting` }, [picture]) : picture,
       ]);
       if (imgs.length === 1) fig.style.maxWidth = `${image[1]}px`;
       if (image[3]) {
         fig.append(el('figcaption', {}, [
           el('span', { text: season }),
           ...(detail ? [el('br'), el('span', { class: 'mute', text: detail })] : []),
+          ...(link ? [el('br'), el('a', { class: 'view-shoot', href: `#p/${link}`, text: 'View shoot →' })] : []),
         ]));
       }
       row.append(fig);
@@ -118,8 +121,7 @@ function buildGallery(p) {
   }));
 }
 
-function buildProject(index) {
-  const p = PROJECTS[index];
+function buildProject(p) {
 
   const credits = el('dl', { class: 'credits' });
   p.credits.forEach(([role, name]) => credits.append(el('dt', { text: role }), el('dd', { text: name })));
@@ -142,7 +144,8 @@ const CLOSE_MS = 950; // matches .project clip-path transition
 
 function openProject(slug) {
   const index = PROJECTS.findIndex((p) => p.slug === slug);
-  if (index < 0) {
+  const project = index >= 0 ? PROJECTS[index] : SHOOTS.find((s) => s.slug === slug);
+  if (!project) {
     location.hash = `#${HOME}`;
     return;
   }
@@ -150,10 +153,20 @@ function openProject(slug) {
   const inner = $('#p-inner');
   const wasOpen = overlay.classList.contains('is-open');
 
-  inner.replaceChildren(...buildProject(index));
-  $('#p-count').textContent = `${pad(index)} / ${pad(PROJECTS.length - 1)}`;
+  // a shoot gallery remembers where its parent project was scrolled to
+  if (project.parent && wasOpen) state.parentScroll = overlay.scrollTop;
+  state.back = project.parent ? `#p/${project.parent}` : null;
+
+  inner.replaceChildren(...buildProject(project));
+  $('#p-count').textContent = project.parent
+    ? SHOOTS.find((s) => s.slug === slug).title
+    : `${pad(index)} / ${pad(PROJECTS.length - 1)}`;
   overlay.scrollTop = 0;
-  document.title = `${PROJECTS[index].title} — Alexane Vitte`;
+  if (!project.parent && state.parentScroll != null) {
+    overlay.scrollTop = state.parentScroll;
+    state.parentScroll = null;
+  }
+  document.title = `${project.title} — Alexane Vitte`;
 
   revealObserver?.disconnect();
   revealObserver = new IntersectionObserver((entries) => {
@@ -233,9 +246,10 @@ document.addEventListener('click', (e) => {
   const link = e.target.closest('a[href^="#p/"]');
   if (link && !link.closest('#project')) state.lastTrigger = link;
 });
-$('#p-close').addEventListener('click', () => { location.hash = `#${state.view}`; });
+const leaveProject = () => { location.hash = state.back ?? `#${state.view}`; };
+$('#p-close').addEventListener('click', leaveProject);
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !$('#project').hidden) location.hash = `#${state.view}`;
+  if (e.key === 'Escape' && !$('#project').hidden) leaveProject();
 });
 
 /* ── Landing: arrow scrolls to the index, UI chrome waits for it ── */

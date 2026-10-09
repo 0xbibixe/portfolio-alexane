@@ -137,26 +137,6 @@ export const PROJECTS = [
     ],
   },
   {
-    slug: 'blurry-papers',
-    title: 'Blurry Papers Magazine',
-    client: 'Blurry Papers',
-    tag: 'Creative Direction & 3D Render',
-    cats: ['direction', '3d'],
-    cover: ['images/blurry_cover_selfie.jpg', 1422, 796],
-    rows: [[0, 1], [2, 3]],
-    images: [
-      ['images/blurry_cover_white.jpg', 1080, 686],
-      ['images/blurry_text.jpg', 1151, 822],
-      ['images/blurry_2.jpg', 1422, 1600],
-      ['images/blurry_3.jpg', 1423, 1600],
-    ],
-    desc: "Éditorial 3D pour Blurry Papers Magazine — « What's in a girl's bag ? ». Contenu entièrement conçu en 3D, set minimaliste et intérieur.",
-    credits: [
-      ['Creative Direction', 'Alexane Vitte & Diane Serfati'],
-      ['3D Designer', 'Alexane Vitte'],
-    ],
-  },
-  {
     slug: 'brand-image-communication',
     title: 'Brand Image & Communication',
     client: 'Coperni',
@@ -167,7 +147,7 @@ export const PROJECTS = [
     rows: [[0], [1, 2, 3, 4], [5, 6, 7, 8]],
     images: [
       ['images/brand_shooting_hero.jpg', 2000, 1230, 'Production, Coordination, Post-Production'],
-      ['images/brand_shooting_1.jpg', 863, 1079, '[1] Production — Pre Fall 23 shot by Pierre-Ange Carlotti'],
+      ['images/brand_shooting_1.jpg', 863, 1079, '[1] Production — Pre Fall 23 shot by Pierre-Ange Carlotti', 'shoot-pre-fall-23'],
       ['images/brand_shooting_2.jpg', 863, 1078, '[2] Production — Resort 24 shot by Marili Andre - Espace Niemeyer'],
       ['images/brand_shooting_3.jpg', 863, 1079, '[3] Production — Pre Fall 24 shot by Theo Sion - CERN'],
       ['images/brand_shooting_4.jpg', 431, 540, '[4] Production & Post-Production — Pre Fall 25 shot by Stuart Winecoff'],
@@ -201,6 +181,26 @@ export const PROJECTS = [
     credits: [
       ['Défilés', 'FW23 — SS25 — FW25 — SS26'],
       ['Production', 'Production & Post-Production'],
+    ],
+  },
+  {
+    slug: 'blurry-papers',
+    title: 'Blurry Papers Magazine',
+    client: 'Blurry Papers',
+    tag: 'Creative Direction & 3D Render',
+    cats: ['direction', '3d'],
+    cover: ['images/blurry_cover_selfie.jpg', 1422, 796],
+    rows: [[0, 1], [2, 3]],
+    images: [
+      ['images/blurry_cover_white.jpg', 1080, 686],
+      ['images/blurry_text.jpg', 1151, 822],
+      ['images/blurry_2.jpg', 1422, 1600],
+      ['images/blurry_3.jpg', 1423, 1600],
+    ],
+    desc: "Éditorial 3D pour Blurry Papers Magazine — « What's in a girl's bag ? ». Contenu entièrement conçu en 3D, set minimaliste et intérieur.",
+    credits: [
+      ['Creative Direction', 'Alexane Vitte & Diane Serfati'],
+      ['3D Designer', 'Alexane Vitte'],
     ],
   },
   {
@@ -244,6 +244,38 @@ export const PROJECTS = [
       ['Lieu', 'Printemps Paris'],
       ['Collaboration', 'Disney × Coperni'],
       ['Mission', 'Production, Set Design & Montage'],
+    ],
+  },
+];
+
+/* Full galleries of single shoots, reached from the images of a project (not listed on the index). */
+export const SHOOTS = [
+  {
+    slug: 'shoot-pre-fall-23',
+    parent: 'brand-image-communication',
+    title: 'Pre Fall 23',
+    client: 'Coperni',
+    tag: 'Brand Image & Communication — Shooting',
+    rows: [[0, 1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]],
+    images: [
+      ['images/shoot_prefall23_01.jpg', 1326, 2000],
+      ['images/shoot_prefall23_02.jpg', 1326, 2000],
+      ['images/shoot_prefall23_03.jpg', 1326, 2000],
+      ['images/shoot_prefall23_04.jpg', 1326, 2000],
+      ['images/shoot_prefall23_05.jpg', 1326, 2000],
+      ['images/shoot_prefall23_06.jpg', 1326, 2000],
+      ['images/shoot_prefall23_07.jpg', 1326, 2000],
+      ['images/shoot_prefall23_08.jpg', 1326, 2000],
+      ['images/shoot_prefall23_09.jpg', 1326, 2000],
+      ['images/shoot_prefall23_10.jpg', 1326, 2000],
+      ['images/shoot_prefall23_11.jpg', 1359, 2000],
+      ['images/shoot_prefall23_12.jpg', 1326, 2000],
+      ['images/shoot_prefall23_13.jpg', 1362, 2000],
+    ],
+    desc: 'Campagne Pre Fall 23 de Coperni, shootée par Pierre-Ange Carlotti. Production du shooting.',
+    credits: [
+      ['Photographe', 'Pierre-Ange Carlotti'],
+      ['Rôle', 'Production'],
     ],
   },
 ];
