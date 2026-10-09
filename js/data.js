@@ -317,7 +317,7 @@ export const SHOOTS = [
     title: 'Pre Fall 24',
     client: 'Coperni',
     tag: 'Brand Image & Communication — Shooting',
-    rows: [[0, 1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11]],
+    rows: [[0, 1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12, 13]],
     images: [
       ['images/shoot_prefall24_01.jpg', 1600, 2000],
       ['images/shoot_prefall24_02.jpg', 1600, 2000],
@@ -331,6 +331,8 @@ export const SHOOTS = [
       ['images/shoot_prefall24_10.jpg', 1600, 2000],
       ['images/shoot_prefall24_11.jpg', 1600, 2000],
       ['images/shoot_prefall24_12.jpg', 1600, 2000],
+      ['images/shoot_prefall24_13.jpg', 1600, 2000],
+      ['images/shoot_prefall24_14.jpg', 1600, 2000],
     ],
     desc: 'Campagne Pre Fall 24 de Coperni, shootée par Theo Sion au CERN. Production du shooting.',
     credits: [
