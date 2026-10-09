@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=60';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=61';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -269,6 +269,18 @@ document.querySelectorAll('#landing-arrow, .landing-wordmark, .landing .nav a').
 new IntersectionObserver(([entry]) => {
   document.body.classList.toggle('on-landing', entry.intersectionRatio > 0.35);
 }, { threshold: [0, 0.35, 0.36, 1] }).observe(landing);
+
+/* Landing slideshow: crossfades through the backdrop images (still image if motion is reduced) */
+const slides = [...document.querySelectorAll('.landing-bg')];
+if (slides.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let current = 0;
+  setInterval(() => {
+    if (document.hidden || !document.body.classList.contains('on-landing')) return;
+    slides[current].classList.remove('is-active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('is-active');
+  }, 5500);
+}
 
 window.addEventListener('hashchange', route);
 window.addEventListener('resize', fitWordmark);

@@ -8,13 +8,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=60" />
+  <link rel="stylesheet" href="css/style.css?v=61" />
 </head>
 <body>
   <a class="skip" href="#main">Aller au contenu</a>
 
   <section class="landing" id="landing" aria-label="Accueil">
-    <img class="landing-bg" src="images/beau_magazine.jpg" alt="" width="1756" height="1080" fetchpriority="high" />
+    <div class="landing-slides" aria-hidden="true">
+      <img class="landing-bg is-active" src="images/beau_magazine.jpg" alt="" width="1756" height="1080" fetchpriority="high" />
+      <img class="landing-bg" src="images/loewe_phone_6.jpg" alt="" width="2000" height="1647" decoding="async" />
+      <img class="landing-bg" src="images/acne_diaries_cover.jpg" alt="" width="2000" height="1250" decoding="async" />
+      <img class="landing-bg" src="images/brand_cover.jpg" alt="" width="1890" height="1063" decoding="async" />
+    </div>
     <div class="landing-top">
       <a class="wordmark landing-wordmark" href="#index" aria-label="Alexane Vitte — accueil">
         <span class="wordmark-text" id="wordmark">ALEXANE VITTE</span>
@@ -71,6 +76,6 @@
     <div class="project-inner" id="p-inner"></div>
   </article>
 
-  <script type="module" src="js/main.js?v=60"></script>
+  <script type="module" src="js/main.js?v=61"></script>
 </body>
 </html>
