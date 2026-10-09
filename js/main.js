@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=61';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=62';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -279,7 +279,7 @@ if (slides.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches
     slides[current].classList.remove('is-active');
     current = (current + 1) % slides.length;
     slides[current].classList.add('is-active');
-  }, 5500);
+  }, 2800);
 }
 
 window.addEventListener('hashchange', route);
