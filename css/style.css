@@ -92,11 +92,12 @@ h1, h2, h3, p { margin: 0; }
   left: 50%; bottom: clamp(28px, 6vh, 64px);
   transform: translateX(-50%);
   padding: 14px;
-  color: var(--fg);
+  color: #fff;
+  mix-blend-mode: difference; /* stays visible on both dark and light parts of the image */
   transition: color 0.3s;
   animation: nudge 2.2s var(--ease) infinite;
 }
-.landing-arrow:hover { color: var(--accent); }
+.landing-arrow:hover, .landing-arrow:focus-visible { color: var(--accent); mix-blend-mode: normal; }
 @keyframes nudge { 0%, 60%, 100% { transform: translate(-50%, 0); } 30% { transform: translate(-50%, 10px); } }
 
 /* filter bar and city badge only once the landing is scrolled past */
