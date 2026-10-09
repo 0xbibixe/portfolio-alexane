@@ -188,7 +188,7 @@ export const PROJECTS = [
     tag: 'Show — Production & Post-Production',
     cats: ['production'],
     year: '2023—2026',
-    cover: ['images/show_cover.jpg', 1500, 1200],
+    cover: ['images/show_cover.jpg', 2000, 1333],
     rows: [[0, 1, 2, 3]],
     images: [
       ['images/show_fw23.jpg', 998, 1248, 'Coperni Fall Winter 23 Show — Boston Dynamics Robots choreography'],
