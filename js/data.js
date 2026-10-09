@@ -204,9 +204,8 @@ export const PROJECTS = [
     tag: 'Production, Set Design & Montage',
     cats: ['windows'],
     cover: ['images/windows_display_cover.jpg', 1024, 768],
-    rows: [[0], [1, 2, 3, 4]],
+    rows: [[0, 1, 2, 3]],
     images: [
-      ['images/windows_display.jpg', 1957, 1205],
       ['images/windows_display_2.jpg', 998, 1248],
       ['images/windows_display_3.jpg', 998, 1248],
       ['images/windows_display_4.jpg', 998, 1248],
