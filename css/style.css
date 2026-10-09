@@ -306,6 +306,11 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
 .view-shoot:hover, .p-row figure:has(.shoot-link:hover) .view-shoot { color: var(--accent); }
 
 /* ── Responsive ───────────────────────────────────────── */
+/* shoot galleries: fixed number of columns, a short last row keeps the same image size */
+@media (min-width: 601px) {
+  .p-rows.has-cols .p-row figure { flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gutter)) / var(--cols)); }
+}
+
 @media (max-width: 900px) {
   .view-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .p-meta .tagcol { grid-column: 1 / 4; }

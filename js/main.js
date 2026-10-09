@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=66';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=67';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -101,11 +101,14 @@ function applyFilter(id) {
 
 /* ── Project overlay ───────────────────────────────────── */
 function buildGallery(p) {
-  const rows = p.rows ?? p.images.map((_, i) => [i]);
-  return el('div', { class: 'p-rows' }, rows.map((idx) => {
+  const rows = p.cols
+    ? Array.from({ length: Math.ceil(p.images.length / p.cols) }, (_, r) => p.images.slice(r * p.cols, (r + 1) * p.cols).map((__, k) => r * p.cols + k))
+    : p.rows ?? p.images.map((_, i) => [i]);
+  const grid = el('div', { class: `p-rows${p.cols ? ' has-cols' : ''}`, ...(p.cols ? { style: `--cols: ${p.cols}` } : {}) });
+  rows.forEach((idx) => {
     const imgs = idx.map((i) => p.images[i]);
     const hasCaps = imgs.some((im) => im[3]);
-    const row = el('div', { class: `p-row${hasCaps ? ' has-caps' : ''}${imgs.length === 1 ? ' is-solo' : ''}` });
+    const row = el('div', { class: `p-row${hasCaps ? ' has-caps' : ''}${imgs.length === 1 && !p.cols ? ' is-solo' : ''}` });
     imgs.forEach((image, k) => {
       const [season, detail] = (image[3] ?? '').split(' — ');
       const picture = img(image, `${p.title} — ${season || `image ${idx[k] + 1}`}`, idx[0] === 0);
@@ -113,7 +116,7 @@ function buildGallery(p) {
       const fig = el('figure', { style: `--ar: ${(image[1] / image[2]).toFixed(4)}` }, [
         link ? el('a', { class: 'shoot-link', href: `#p/${link}`, 'aria-label': `${season || p.title} — voir tout le shooting` }, [picture]) : picture,
       ]);
-      if (imgs.length === 1) fig.style.maxWidth = `${image[1]}px`;
+      if (imgs.length === 1 && !p.cols) fig.style.maxWidth = `${image[1]}px`;
       if (image[3]) {
         fig.append(el('figcaption', {}, [
           el('span', { text: season }),
@@ -123,8 +126,9 @@ function buildGallery(p) {
       }
       row.append(fig);
     });
-    return row;
-  }));
+    grid.append(row);
+  });
+  return grid;
 }
 
 function buildProject(p) {

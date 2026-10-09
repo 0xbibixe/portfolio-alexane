@@ -147,9 +147,8 @@ export const PROJECTS = [
     cats: ['production'],
     year: '2023—2025',
     cover: ['images/brand_cover.jpg', 1890, 1063],
-    rows: [[0], [1, 2, 3, 4], [5, 6, 7, 8]],
+    rows: [[0, 1, 2, 3], [4, 5, 6, 7]],
     images: [
-      ['images/brand_shooting_hero.jpg', 2000, 1230, 'Production, Coordination, Post-Production'],
       ['images/brand_shooting_1.jpg', 863, 1079, '[1] Production — Pre Fall 23 shot by Pierre-Ange Carlotti', 'shoot-pre-fall-23'],
       ['images/brand_shooting_2.jpg', 863, 1078, '[2] Production — Resort 24 shot by Marili Andre - Espace Niemeyer', 'shoot-resort-24'],
       ['images/brand_shooting_3.jpg', 863, 1079, '[3] Production — Pre Fall 24 shot by Theo Sion - CERN', 'shoot-pre-fall-24'],
@@ -259,7 +258,7 @@ export const SHOOTS = [
     title: 'Pre Fall 23',
     client: 'Coperni',
     tag: 'Brand Image & Communication — Shooting',
-    rows: [[0, 1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]],
+    cols: 4,
     images: [
       ['images/shoot_prefall23_01.jpg', 1326, 2000],
       ['images/shoot_prefall23_02.jpg', 1326, 2000],
@@ -287,7 +286,7 @@ export const SHOOTS = [
     title: 'Resort 24',
     client: 'Coperni',
     tag: 'Brand Image & Communication — Shooting',
-    rows: [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13]],
+    cols: 4,
     images: [
       ['images/shoot_resort24_01.jpg', 1600, 2000],
       ['images/shoot_resort24_02.jpg', 1600, 2000],
@@ -317,7 +316,7 @@ export const SHOOTS = [
     title: 'Pre Fall 24',
     client: 'Coperni',
     tag: 'Brand Image & Communication — Shooting',
-    rows: [[0, 1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12, 13]],
+    cols: 4,
     images: [
       ['images/shoot_prefall24_01.jpg', 1600, 2000],
       ['images/shoot_prefall24_02.jpg', 1600, 2000],
