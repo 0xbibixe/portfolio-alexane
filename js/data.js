@@ -183,9 +183,9 @@ export const PROJECTS = [
   },
   {
     slug: 'shows-shootings',
-    title: 'Brand Image & Communication : Show Production & Post-Production',
+    title: 'Brand Image & Communication',
     client: 'Coperni',
-    tag: 'Production & Coordination',
+    tag: 'Show Production & Post-Production',
     cats: ['production'],
     year: '2023—2026',
     cover: ['images/show_cover.jpg', 1500, 1200],
