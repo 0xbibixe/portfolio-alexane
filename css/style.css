@@ -56,6 +56,54 @@ h1, h2, h3, p { margin: 0; }
   font-stretch: 100%;
 }
 
+/* ── Landing (full-screen image + arrow) ─────────────── */
+.landing {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 420px;
+  overflow: hidden;
+  background: #000;
+}
+.landing-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.landing::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(5,5,5,0.55), rgba(5,5,5,0) 38%, rgba(5,5,5,0) 70%, rgba(5,5,5,0.5));
+  pointer-events: none;
+}
+.landing-intro {
+  position: absolute; z-index: 1;
+  top: var(--gutter); left: var(--gutter);
+  max-width: 22em;
+  font-size: clamp(22px, 3.1vw, 46px);
+  font-weight: 500;
+  font-stretch: 85%;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.landing-intro .hl { color: var(--accent); }
+.landing-arrow {
+  position: absolute; z-index: 1;
+  left: 50%; bottom: clamp(28px, 6vh, 64px);
+  transform: translateX(-50%);
+  padding: 14px;
+  color: var(--fg);
+  transition: color 0.3s;
+  animation: nudge 2.2s var(--ease) infinite;
+}
+.landing-arrow:hover { color: var(--accent); }
+@keyframes nudge { 0%, 60%, 100% { transform: translate(-50%, 0); } 30% { transform: translate(-50%, 10px); } }
+
+/* filter bar and city badge only once the landing is scrolled past */
+body.on-landing .filterbar,
+body.on-landing .badge { opacity: 0; pointer-events: none; }
+.badge { transition: opacity 0.4s; }
+
 /* ── Header ───────────────────────────────────────────── */
 .site-header {
   padding: var(--gutter) var(--gutter) 0;
@@ -282,5 +330,6 @@ main { padding: clamp(60px, 12vh, 140px) var(--gutter) 140px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .wordmark-text { transform: none; }
+  .landing-arrow { animation: none; }
   .p-row img { opacity: 1; transform: none; }
 }
