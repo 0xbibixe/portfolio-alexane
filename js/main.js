@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=78';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=79';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -75,7 +75,7 @@ function renderFilterbar() {
 }
 
 function onFilter(id) {
-  if (state.view !== HOME) location.hash = `#${HOME}`;
+  if (state.view !== HOME || !$('#project').hidden) location.hash = `#${HOME}`;
   applyFilter(id);
   if (document.body.classList.contains('on-landing')) goToContent(true);
 }
@@ -192,7 +192,6 @@ function openProject(slug) {
     overlay.hidden = false;
     requestAnimationFrame(() => overlay.classList.add('is-open'));
     document.body.classList.add('is-locked');
-    $('#filterbar').classList.add('is-hidden');
   }
   $('#p-close').focus({ preventScroll: true });
 }
@@ -264,7 +263,7 @@ document.addEventListener('keydown', (e) => {
 
 /* ── Landing: arrow scrolls to the index, UI chrome waits for it ── */
 const landing = $('#landing');
-document.querySelectorAll('#landing-arrow, .landing-wordmark, .landing .nav a').forEach((a) => a.addEventListener('click', (e) => {
+document.querySelectorAll('.landing-wordmark, .landing .nav a').forEach((a) => a.addEventListener('click', (e) => {
   e.preventDefault();
   const target = a.dataset.view ?? HOME;
   if (location.hash !== `#${target}`) location.hash = `#${target}`;
