@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=81';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=82';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -298,19 +298,23 @@ if (slides.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /* Slightly slower, smoothed mouse-wheel / trackpad scrolling (touch keeps its native momentum). */
 const WHEEL_SPEED = 0.7;   // 1 = native
-const WHEEL_EASE = 0.12;   // fraction of the remaining distance covered each frame
+const WHEEL_GLIDE = 150;  // ms: higher = longer, softer glide
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const scroller = () => (projectEl.hidden ? document.scrollingElement : projectEl);
   let target = null;
   let current = 0;
   let active = null;
   let frame = 0;
+  let last = 0;
 
-  const step = () => {
+  // frame-rate independent exponential smoothing, so 60 Hz and 120 Hz screens feel the same
+  const step = (now) => {
+    const dt = Math.min(64, now - last);
+    last = now;
     frame = 0;
     if (!active) return;
-    current += (target - current) * WHEEL_EASE;
-    if (Math.abs(target - current) < 0.5) current = target;
+    current += (target - current) * (1 - Math.exp(-dt / WHEEL_GLIDE));
+    if (Math.abs(target - current) < 0.3) current = target;
     active.scrollTop = current;
     if (current !== target) frame = requestAnimationFrame(step);
     else target = null;
@@ -328,7 +332,7 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const max = el.scrollHeight - el.clientHeight;
     target = Math.min(max, Math.max(0, target + e.deltaY * unit * WHEEL_SPEED));
     e.preventDefault();
-    if (!frame) frame = requestAnimationFrame(step);
+    if (!frame) { last = performance.now(); frame = requestAnimationFrame(step); }
   }, { passive: false });
 
   // anything else that scrolls (scrollbar drag, keyboard, in-page jumps) takes over from the animation
