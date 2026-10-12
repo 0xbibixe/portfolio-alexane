@@ -73,7 +73,7 @@ export const PROJECTS = [
       ['images/resort26_h.jpg', 768, 1152],
       ['images/resort26_i.jpg', 768, 1152],
     ],
-    desc: "Coperni\nShot by Sam Penn\nMarketing Assets\n\nConcept input: Room with spa props, clear light, wellness atmosphere",
+    desc: "Coperni\nShot by Sam Penn\nMarketing Assets",
     credits: [
       ["Creative Direction", "Sebastien Meyer"],
       ["Creative Direction Assistant", "Mathilde Matteucci & Alexane Vitte"],
@@ -104,7 +104,7 @@ export const PROJECTS = [
       ['images/fw25_i.jpg', 2000, 1500],
       ['images/fw25_j.jpg', 2000, 1500],
     ],
-    desc: "Coperni\nShot by Gorka Postigo\nMarketing Assets\n\nConcept input: Room with tech props, minimal set, warm light, indoor",
+    desc: "Coperni\nShot by Gorka Postigo\nMarketing Assets",
     credits: [
       ["Creative Direction", "Sebastien Meyer"],
       ["Creative Direction Assistant", "Mathilde Matteucci & Alexane Vitte"],
