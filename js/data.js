@@ -76,7 +76,7 @@ export const PROJECTS = [
     desc: "Coperni\nShot by Sam Penn\nMarketing Assets\n\nConcept input: Room with spa props, clear light, wellness atmosphere",
     credits: [
       ["Creative Direction", "Sebastien Meyer"],
-      ["Creative Direction Assistant", "Alexane Vitte"],
+      ["Creative Direction Assistant", "Mathilde Matteucci & Alexane Vitte"],
       ["Photographer", "Sam Penn"],
       ["Styling", "Helena Tejedor"],
       ["MUA", "Fay Bio-Toura"],
@@ -107,7 +107,7 @@ export const PROJECTS = [
     desc: "Coperni\nShot by Gorka Postigo\nMarketing Assets\n\nConcept input: Room with tech props, minimal set, warm light, indoor",
     credits: [
       ["Creative Direction", "Sebastien Meyer"],
-      ["Creative Direction Assistant", "Alexane Vitte"],
+      ["Creative Direction Assistant", "Mathilde Matteucci & Alexane Vitte"],
       ["Photographer", "Gorka Postigo"],
       ["Styling", "Helena Tejedor"],
       ["MUA", "Victoria Reuter"],
