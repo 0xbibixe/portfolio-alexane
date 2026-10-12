@@ -122,7 +122,7 @@ export const PROJECTS = [
     client: "Loewe",
     tag: "Creative Direction",
     cats: ['direction'],
-    rows: [[0], [1, 2, 3], [4, 5, 6, 7], [8, 9]],
+    rows: [[0], [1, 2, 3], [4, 5, 6, 7]],
     images: [
       ['images/loewe_phone_8.jpg', 2000, 1647],
       ['images/loewe_phone_1.jpg', 2000, 1647],
@@ -132,8 +132,6 @@ export const PROJECTS = [
       ['images/loewe_phone_5.jpg', 1333, 2000],
       ['images/loewe_phone_6.jpg', 2000, 1647],
       ['images/loewe_phone_2.jpg', 2000, 1647],
-      ['images/loewe_4.jpg', 1170, 1466],
-      ['images/loewe_5.jpg', 1170, 1466],
     ],
     desc: "An Almodovar love story\nPrint Magazine - EXIT 01 : Vuelve\n\nConcept input: A love story inspired by Almodovar’s movie «Women on the verge of a nervous breakdown», 1988",
     credits: [
