@@ -203,6 +203,8 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   transition: transform 0.6s var(--ease), opacity 0.4s;
 }
 .filterbar::-webkit-scrollbar { display: none; }
+/* project pages: filter menu only at the very bottom */
+body.is-locked:not(.at-project-end) .filterbar { transform: translateY(100%); opacity: 0; pointer-events: none; }
 .filterbar.is-hidden { transform: translateY(100%); opacity: 0; pointer-events: none; }
 .filterbar button { color: var(--mute); white-space: nowrap; transition: color 0.3s; }
 .filterbar button:hover { color: var(--fg); }

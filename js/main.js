@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=79';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=80';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -171,11 +171,9 @@ function openProject(slug) {
   $('#p-count').textContent = project.parent
     ? SHOOTS.find((s) => s.slug === slug).title
     : `${pad(index)} / ${pad(PROJECTS.length - 1)}`;
-  overlay.scrollTop = 0;
-  if (!project.parent && state.parentScroll != null) {
-    overlay.scrollTop = state.parentScroll;
-    state.parentScroll = null;
-  }
+  const restore = !project.parent && state.parentScroll != null;
+  const startTop = restore ? state.parentScroll : 0;
+  if (restore) state.parentScroll = null;
   document.title = `${project.title} — Alexane Vitte`;
 
   revealObserver?.disconnect();
@@ -190,17 +188,30 @@ function openProject(slug) {
 
   if (!wasOpen) {
     overlay.hidden = false;
-    requestAnimationFrame(() => overlay.classList.add('is-open'));
+    requestAnimationFrame(() => { overlay.classList.add('is-open'); updateProjectEnd(); });
     document.body.classList.add('is-locked');
   }
+  overlay.scrollTop = startTop; // after un-hiding, otherwise the browser keeps the previous scroll
+  if (restore) requestAnimationFrame(() => { overlay.scrollTop = startTop; updateProjectEnd(); });
+  updateProjectEnd();
   $('#p-close').focus({ preventScroll: true });
 }
+
+/* On project pages the filter menu only shows once the bottom of the page is reached. */
+const projectEl = $('#project');
+const updateProjectEnd = () => {
+  const atEnd = projectEl.scrollTop + projectEl.clientHeight >= projectEl.scrollHeight - 60;
+  document.body.classList.toggle('at-project-end', projectEl.classList.contains('is-open') && atEnd);
+};
+projectEl.addEventListener('scroll', updateProjectEnd, { passive: true });
+window.addEventListener('resize', updateProjectEnd);
+new ResizeObserver(updateProjectEnd).observe($('#p-inner'));
 
 function closeProject() {
   const overlay = $('#project');
   if (overlay.hidden) return;
   overlay.classList.remove('is-open');
-  document.body.classList.remove('is-locked');
+  document.body.classList.remove('is-locked', 'at-project-end');
   document.title = 'Alexane Vitte — Image & Creative Direction';
   // transitionend is unreliable here (bubbling child transitions, background tabs)
   clearTimeout(closeTimer);
