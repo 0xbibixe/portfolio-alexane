@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=80';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=81';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -294,6 +294,47 @@ if (slides.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches
     current = (current + 1) % slides.length;
     slides[current].classList.add('is-active');
   }, 2800);
+}
+
+/* Slightly slower, smoothed mouse-wheel / trackpad scrolling (touch keeps its native momentum). */
+const WHEEL_SPEED = 0.7;   // 1 = native
+const WHEEL_EASE = 0.12;   // fraction of the remaining distance covered each frame
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const scroller = () => (projectEl.hidden ? document.scrollingElement : projectEl);
+  let target = null;
+  let current = 0;
+  let active = null;
+  let frame = 0;
+
+  const step = () => {
+    frame = 0;
+    if (!active) return;
+    current += (target - current) * WHEEL_EASE;
+    if (Math.abs(target - current) < 0.5) current = target;
+    active.scrollTop = current;
+    if (current !== target) frame = requestAnimationFrame(step);
+    else target = null;
+  };
+
+  window.addEventListener('wheel', (e) => {
+    if (e.ctrlKey || e.defaultPrevented || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    const el = scroller();
+    if (active !== el || target === null) {
+      active = el;
+      current = el.scrollTop;
+      target = current;
+    }
+    const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? el.clientHeight : 1;
+    const max = el.scrollHeight - el.clientHeight;
+    target = Math.min(max, Math.max(0, target + e.deltaY * unit * WHEEL_SPEED));
+    e.preventDefault();
+    if (!frame) frame = requestAnimationFrame(step);
+  }, { passive: false });
+
+  // anything else that scrolls (scrollbar drag, keyboard, in-page jumps) takes over from the animation
+  const release = () => { if (!frame) target = null; };
+  window.addEventListener('scroll', release, { passive: true });
+  projectEl.addEventListener('scroll', release, { passive: true });
 }
 
 window.addEventListener('hashchange', route);
