@@ -285,7 +285,7 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
 .p-title { font: inherit; transition: color 0.3s; }
 .p-title:hover { color: var(--accent); }
 .p-meta .tagcol { grid-column: 1 / 4; }
-.p-meta .desc { grid-column: 5 / 9; }
+.p-meta .desc { grid-column: 5 / 9; white-space: pre-line; }
 .p-meta .credits { grid-column: 10 / 13; margin: 0; }
 .credits dt { color: var(--mute); }
 .credits dd { margin: 0 0 6px; }
