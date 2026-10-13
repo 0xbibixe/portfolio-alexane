@@ -147,13 +147,7 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   background: var(--bg);
 }
 .reel-item {
-  /* 5:7 portrait card, centred above the filter menu; the pictures are revealed inside it */
-  position: absolute;
-  left: 50%;
-  top: calc((100% - 56px) / 2);
-  height: min(calc(100svh - 150px), calc((100vw - 2 * var(--gutter)) * 1.4));
-  aspect-ratio: 5 / 7;
-  translate: -50% -50%;
+  position: absolute; inset: 0;
   display: block;
   overflow: hidden;
   background: #111;
@@ -166,11 +160,10 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   background: linear-gradient(to top, rgba(5,5,5,0.55), rgba(5,5,5,0) 38%);
   pointer-events: none;
 }
-/* the 5:7 card is already framed: captions sit inside it, at the bottom left */
 .reel-cap {
   position: absolute; z-index: 1;
-  left: 14px;
-  bottom: 14px;
+  left: var(--gutter);
+  bottom: calc(76px + env(safe-area-inset-bottom, 0px));
   display: grid;
   grid-template-columns: 3.2em 1fr;
   font-size: clamp(11px, 1.05vw, 15px);
@@ -368,7 +361,7 @@ body.is-locked:not(.at-project-end) .filterbar { transform: translateY(100%); op
 @media (prefers-reduced-motion: reduce) {
   .view-index { height: auto !important; }
   .reel-stage { position: static; height: auto; overflow: visible; }
-  .reel-item { position: relative; left: auto; top: auto; translate: none; margin: 0 auto 24px; display: block; transform: none !important; clip-path: none !important; visibility: visible !important; pointer-events: auto !important; }
+  .reel-item { position: relative; display: block; height: 100vh; height: 100svh; transform: none !important; clip-path: none !important; visibility: visible !important; pointer-events: auto !important; }
   .reel-item img { transform: none !important; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .wordmark-text { transform: none; }
