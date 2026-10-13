@@ -166,7 +166,7 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   bottom: calc(76px + env(safe-area-inset-bottom, 0px));
   display: grid;
   grid-template-columns: 3.2em 1fr;
-  font-size: clamp(11px, 1.05vw, 15px);
+  font-size: clamp(10px, 0.9vw, 13px);
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1.25;
