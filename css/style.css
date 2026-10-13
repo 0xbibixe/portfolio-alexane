@@ -101,7 +101,6 @@ body.on-landing:not(.is-locked) .filterbar { transform: none; opacity: 1; pointe
   line-height: 0.8;
 }
 
-.wordmark:hover .wordmark-text { color: var(--accent); }
 
 .wordmark-text {
   display: inline-block;
@@ -163,7 +162,6 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
 .idx-cap .num { color: var(--mute); }
 .idx-cap .sub { color: var(--mute); }
 .idx-cap .t { transition: color 0.3s; }
-.idx-item:hover .t { color: var(--accent); }
 
 /* filtered-out state for both views */
 .is-out { display: none; }
@@ -254,7 +252,6 @@ body.is-locked:not(.at-project-end) .filterbar { transform: translateY(100%); op
   padding: var(--gutter);
   mix-blend-mode: difference;
 }
-.back:hover { color: var(--accent); }
 .p-count { color: var(--mute); }
 
 .project-inner { padding: 0 var(--gutter) 120px; }
@@ -274,8 +271,7 @@ body.is-locked:not(.at-project-end) .filterbar { transform: translateY(100%); op
   line-height: 1.45;
 }
 .p-meta .mute { color: var(--mute); }
-.p-title { font: inherit; transition: color 0.3s; }
-.p-title:hover { color: var(--accent); }
+.p-title { font: inherit; }
 .p-meta .tagcol { grid-column: 1 / 4; }
 .p-meta .desc { grid-column: 5 / 9; white-space: pre-line; }
 .p-meta .credits { grid-column: 10 / 13; margin: 0; }
@@ -295,7 +291,7 @@ body.is-locked:not(.at-project-end) .filterbar { transform: translateY(100%); op
 .shoot-link img { transition: opacity 1s var(--ease), transform 1.2s var(--ease), filter 0.4s; }
 .shoot-link:hover img.is-seen { transform: scale(1.03); filter: brightness(0.8); }
 .view-shoot { color: var(--mute); text-transform: none; transition: color 0.3s; }
-.view-shoot:hover, .p-row figure:has(.shoot-link:hover) .view-shoot { color: var(--accent); }
+.view-shoot:hover, .p-row figure:has(.shoot-link:hover) .view-shoot { color: var(--fg); }
 
 /* ── Responsive ───────────────────────────────────────── */
 /* shoot galleries: fixed number of columns, a short last row keeps the same image size */
