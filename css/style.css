@@ -132,7 +132,9 @@ body.on-landing:not(.is-locked) .filterbar { transform: none; opacity: 1; pointe
 
 /* ── Views ────────────────────────────────────────────── */
 main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh; min-height: 100svh; }
-.view-info { padding: clamp(60px, 12vh, 140px) var(--gutter) 140px; }
+.view-info { padding: var(--gutter) var(--gutter) 140px; }
+.info-head { margin-bottom: clamp(60px, 12vh, 140px); }
+.info-head .role { padding-top: 10px; }
 .view[hidden] { display: none; }
 
 /* ── INDEX ─────────────────────────────────────────────── */

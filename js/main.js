@@ -36,11 +36,13 @@ const state = { view: HOME, filter: 'all', lastTrigger: null, back: null, parent
 
 /* ── Wordmark: scale text to fill header width ─────────── */
 function fitWordmark() {
-  const text = $('#wordmark');
-  const box = text.parentElement;
-  text.style.fontSize = '100px';
-  const ratio = box.clientWidth / text.scrollWidth;
-  text.style.fontSize = `${Math.floor(100 * ratio * 1000) / 1000}px`;
+  document.querySelectorAll('.wordmark-text').forEach((text) => {
+    const box = text.parentElement;
+    if (!box.clientWidth) return; // hidden view: fitted again when shown
+    text.style.fontSize = '100px';
+    const ratio = box.clientWidth / text.scrollWidth;
+    text.style.fontSize = `${Math.floor(100 * ratio * 1000) / 1000}px`;
+  });
 }
 
 /* ── Render: INDEX (numbered grid) ─────────────────────── */
@@ -331,6 +333,7 @@ function showView(view) {
   });
   $('#filterbar').classList.toggle('is-hidden', view === 'info');
   if (view === HOME) layoutReel();
+  if (view === 'info') fitWordmark();
 }
 
 function route() {
@@ -380,8 +383,8 @@ new IntersectionObserver(([entry]) => {
 }, { threshold: [0, 0.35, 0.36, 1] }).observe(landing);
 
 /* Slightly slower, smoothed mouse-wheel / trackpad scrolling (touch keeps its native momentum). */
-const WHEEL_SPEED = 0.7;   // 1 = native
-const WHEEL_GLIDE = 150;  // ms: higher = longer, softer glide
+const WHEEL_SPEED = 1.0;   // 1 = native
+const WHEEL_GLIDE = 120;  // ms: higher = longer, softer glide
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const scroller = () => (projectEl.hidden ? document.scrollingElement : projectEl);
   let target = null;
