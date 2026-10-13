@@ -251,14 +251,17 @@ body.is-locked:not(.at-project-end) .filterbar { transform: translateY(100%); op
   position: fixed;
   right: var(--gutter);
   bottom: 18px;
-  z-index: 21;
+  z-index: 61; /* above the filter menu's dark fade, which was dimming it */
   display: flex;
   align-items: center;
   gap: 7px;
   padding: 6px 10px;
-  border: 1px solid #2a2927;
+  border: 1px solid rgba(255, 248, 239, 0.5);
   border-radius: 4px;
-  background: rgba(5,5,5,0.7);
+  background: rgba(5,5,5,0.92);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--fg);
   font-weight: 800;
   font-stretch: 125%;
 }
