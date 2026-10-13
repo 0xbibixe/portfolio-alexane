@@ -151,10 +151,9 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   display: block;
   overflow: hidden;
   background: #111;
-  box-shadow: 0 -2px 0 rgba(5,5,5,0.9), 0 -40px 80px rgba(5,5,5,0.55);
-  will-change: transform;
+  will-change: clip-path;
 }
-.reel-item img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+.reel-item img { width: 100%; height: 100%; object-fit: cover; }
 .reel-item::after {
   content: '';
   position: absolute; inset: 0;
@@ -362,7 +361,7 @@ body.is-locked:not(.at-project-end) .filterbar { transform: translateY(100%); op
 @media (prefers-reduced-motion: reduce) {
   .view-index { height: auto !important; }
   .reel-stage { position: static; height: auto; overflow: visible; }
-  .reel-item { position: relative; display: block; height: 100vh; height: 100svh; transform: none !important; visibility: visible !important; pointer-events: auto !important; }
+  .reel-item { position: relative; display: block; height: 100vh; height: 100svh; transform: none !important; clip-path: none !important; visibility: visible !important; pointer-events: auto !important; }
   .reel-item img { transform: none !important; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .wordmark-text { transform: none; }

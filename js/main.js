@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=86';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=87';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -114,21 +114,19 @@ function updateReel() {
   const scrolled = -root.getBoundingClientRect().top;
   const units = items.length - 1 + (REEL_OVERLAP - 1);
   const progress = Math.min(1, Math.max(0, scrolled / total)) * units;
-  const enter = (j) => (j <= 0 ? 1 : ease(Math.min(1, Math.max(0, (progress - (j - 1)) / REEL_OVERLAP))));
+  const enter = (j) => (j <= 0 ? 1 : Math.min(1, Math.max(0, (progress - (j - 1)) / REEL_OVERLAP)));
   let current = 0;
   items.forEach((item, j) => { if (enter(j) >= 0.5) current = j; });
   items.forEach((item, j) => {
     const e = enter(j);
     const next = j + 1 < items.length ? enter(j + 1) : 0;
-    const y = (1 - e) * 100 - 10 * next;
-    const covered = next >= 1;
-    item.style.transform = `translate3d(0, ${y.toFixed(3)}%, 0)`;
-    item.style.visibility = e <= 0 || covered ? 'hidden' : 'visible';
+    // The pictures never move: each new cover is revealed from the bottom edge upwards,
+    // like a window that opens over the previous picture.
+    item.style.clipPath = `inset(${((1 - e) * 100).toFixed(3)}% 0 0 0)`;
+    item.style.visibility = e <= 0 || next >= 1 ? 'hidden' : 'visible';
     item.style.zIndex = String(j + 1);
     item.style.pointerEvents = j === current ? 'auto' : 'none';
     item.tabIndex = j === current ? 0 : -1;
-    const picture = item.firstElementChild;
-    picture.style.transform = `translate3d(0, ${((1 - e) * 9).toFixed(3)}%, 0) scale(1.2)`;
   });
 }
 
