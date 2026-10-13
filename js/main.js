@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=84';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=85';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -32,7 +32,7 @@ function img([src, w, h], alt, eager = false) {
 }
 
 /* ── State ─────────────────────────────────────────────── */
-const state = { view: HOME, filter: 'all', lastTrigger: null, back: null, parentScroll: null };
+const state = { view: HOME, filter: 'all', lastTrigger: null, back: null, parentScroll: null, indexMode: 'reel' };
 
 /* ── Wordmark: scale text to fill header width ─────────── */
 function fitWordmark() {
@@ -47,61 +47,94 @@ function fitWordmark() {
 function renderIndex() {
   const root = $('#view-index');
   const stage = el('div', { class: 'reel-stage' });
+  const grid = el('div', { class: 'idx-grid' });
   PROJECTS.forEach((p, i) => {
+    const cats = p.cats.join(' ');
+    const cap = [
+      el('span', { class: 'num', text: pad(i) }),
+      el('span', {}, [
+        el('span', { class: 't', text: p.title }),
+        el('br'),
+        el('span', { class: 'sub', text: p.tag }),
+      ]),
+    ];
     stage.append(
-      el('a', { class: 'reel-item', href: `#p/${p.slug}`, 'data-cats': p.cats.join(' '), 'aria-label': p.title }, [
+      el('a', { class: 'reel-item', href: `#p/${p.slug}`, 'aria-label': p.title }, [
         img(p.cover ?? p.images[0], p.title, true),
-        el('div', { class: 'reel-cap' }, [
-          el('span', { class: 'num', text: pad(i) }),
-          el('span', {}, [
-            el('span', { class: 't', text: p.title }),
-            el('br'),
-            el('span', { class: 'sub', text: p.tag }),
-          ]),
-        ]),
+        el('div', { class: 'reel-cap' }, cap.map((n) => n.cloneNode(true))),
+      ]),
+    );
+    grid.append(
+      el('a', { class: 'idx-item', href: `#p/${p.slug}`, 'data-cats': cats }, [
+        el('div', { class: 'frame' }, [img(p.cover ?? p.images[0], p.title, i < 3)]),
+        el('div', { class: 'idx-cap' }, cap),
       ]),
     );
   });
-  root.append(stage);
+  root.append(stage, grid);
+  setIndexMode('reel');
 }
 
-/* ── Reel: full-screen project covers that slide up over each other while scrolling ── */
+/* The index has two layouts: the scroll-driven reel (default, straight after the intro)
+   and the filterable grid (as soon as a filter of the menu is used). */
+function setIndexMode(mode) {
+  state.indexMode = mode;
+  const root = $('#view-index');
+  root.classList.toggle('is-reel', mode === 'reel');
+  root.classList.toggle('is-grid', mode === 'grid');
+  layoutReel();
+}
+
+/* ── Reel: full-screen covers stacked as layers; each one slides up over the others while scrolling ── */
 const ease = (t) => t * t * (3 - 2 * t);
+const REEL_OVERLAP = 2.3;   // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
+const REEL_STEP = 0.8;      // screens of scrolling per slot
 let reelFrame = 0;
 
 function layoutReel() {
   const root = $('#view-index');
-  const items = [...root.querySelectorAll('.reel-item')].filter((i) => !i.classList.contains('is-out'));
-  root.style.setProperty('--n', String(Math.max(1, items.length)));
+  const n = root.querySelectorAll('.reel-item').length;
+  const stage = root.querySelector('.reel-stage');
+  if (state.indexMode === 'reel') {
+    const units = n - 1 + (REEL_OVERLAP - 1);
+    root.style.height = `${Math.round(stage.offsetHeight * (1 + units * REEL_STEP))}px`;
+  } else {
+    root.style.height = '';
+  }
   updateReel();
 }
 
 function updateReel() {
   reelFrame = 0;
   const root = $('#view-index');
-  if (root.hidden) return;
-  const items = [...root.querySelectorAll('.reel-item')].filter((i) => !i.classList.contains('is-out'));
-  if (!items.length) return;
-  const stage = root.firstElementChild;
+  if (root.hidden || state.indexMode !== 'reel') return;
+  const items = [...root.querySelectorAll('.reel-item')];
+  const stage = root.querySelector('.reel-stage');
   const total = Math.max(1, root.offsetHeight - stage.offsetHeight);
   const scrolled = -root.getBoundingClientRect().top;
-  const progress = Math.min(1, Math.max(0, scrolled / total)) * (items.length - 1);
-  const enter = (j) => (j <= 0 ? 1 : ease(Math.min(1, Math.max(0, progress - (j - 1)))));
-  const current = Math.round(progress);
+  const units = items.length - 1 + (REEL_OVERLAP - 1);
+  const progress = Math.min(1, Math.max(0, scrolled / total)) * units;
+  const enter = (j) => (j <= 0 ? 1 : ease(Math.min(1, Math.max(0, (progress - (j - 1)) / REEL_OVERLAP))));
+  let current = 0;
+  items.forEach((item, j) => { if (enter(j) >= 0.5) current = j; });
   items.forEach((item, j) => {
-    const y = (1 - enter(j)) * 100 - 14 * (j + 1 < items.length ? enter(j + 1) : 0);
-    const hidden = y >= 100 || (j + 1 < items.length && enter(j + 1) >= 1);
+    const e = enter(j);
+    const next = j + 1 < items.length ? enter(j + 1) : 0;
+    const y = (1 - e) * 100 - 10 * next;
+    const covered = next >= 1;
     item.style.transform = `translate3d(0, ${y.toFixed(3)}%, 0)`;
-    item.style.visibility = hidden ? 'hidden' : 'visible';
+    item.style.visibility = e <= 0 || covered ? 'hidden' : 'visible';
     item.style.zIndex = String(j + 1);
     item.style.pointerEvents = j === current ? 'auto' : 'none';
     item.tabIndex = j === current ? 0 : -1;
+    const picture = item.firstElementChild;
+    picture.style.transform = `translate3d(0, ${((1 - e) * 9).toFixed(3)}%, 0) scale(1.2)`;
   });
 }
 
 const queueReel = () => { if (!reelFrame) reelFrame = requestAnimationFrame(updateReel); };
 window.addEventListener('scroll', queueReel, { passive: true });
-window.addEventListener('resize', queueReel);
+window.addEventListener('resize', layoutReel);
 
 /* ── Filter ────────────────────────────────────────────── */
 function renderFilterbar() {
@@ -117,6 +150,7 @@ function renderFilterbar() {
 function onFilter(id) {
   if (state.view !== HOME || !$('#project').hidden) location.hash = `#${HOME}`;
   applyFilter(id);
+  setIndexMode('grid');
   goToContent(true);
 }
 
@@ -126,11 +160,17 @@ function applyFilter(id) {
     b.setAttribute('aria-pressed', String(b.dataset.filter === id));
   });
 
-  document.querySelectorAll('#view-index .reel-item').forEach((item) => {
+  let visible = 0;
+  document.querySelectorAll('#view-index .idx-item').forEach((item) => {
     const match = id === 'all' || item.dataset.cats.split(' ').includes(id);
     item.classList.toggle('is-out', !match);
+    item.classList.remove('is-in');
+    if (!match) return;
+    void item.offsetWidth; // restart entry animation
+    item.classList.add('is-in');
+    item.style.animationDelay = `${Math.min(visible, 6) * 60}ms`;
+    visible += 1;
   });
-  layoutReel();
 }
 
 /* ── Project overlay ───────────────────────────────────── */
@@ -271,7 +311,7 @@ function showView(view) {
     else a.removeAttribute('aria-current');
   });
   $('#filterbar').classList.toggle('is-hidden', view === 'info');
-  if (view === HOME) queueReel();
+  if (view === HOME) layoutReel();
 }
 
 function route() {
@@ -312,6 +352,7 @@ const landing = $('#landing');
 document.querySelectorAll('.landing-wordmark, .landing .nav a').forEach((a) => a.addEventListener('click', (e) => {
   e.preventDefault();
   const target = a.dataset.view ?? HOME;
+  if (target === HOME) { applyFilter('all'); setIndexMode('reel'); }
   if (location.hash !== `#${target}`) location.hash = `#${target}`;
   goToContent(true);
 }));
