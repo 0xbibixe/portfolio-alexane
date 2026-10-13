@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=89';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=87';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -59,7 +59,7 @@ function renderIndex() {
       ]),
     ];
     stage.append(
-      el('a', { class: `reel-item reel-${REEL_SIZES[i % REEL_SIZES.length]}`, href: `#p/${p.slug}`, 'aria-label': p.title }, [
+      el('a', { class: 'reel-item', href: `#p/${p.slug}`, 'aria-label': p.title }, [
         img(p.cover ?? p.images[0], p.title, true),
         el('div', { class: 'reel-cap' }, cap.map((n) => n.cloneNode(true))),
       ]),
@@ -88,7 +88,6 @@ function setIndexMode(mode) {
 /* ── Reel: full-screen covers stacked as layers; each one slides up over the others while scrolling ── */
 const ease = (t) => t * t * (3 - 2 * t);
 const REEL_OVERLAP = 2.3;   // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
-const REEL_SIZES = ['full', 'mid', 'tall', 'full', 'short', 'tall', 'full', 'mid', 'tall', 'full']; // height of each cover's window (always full width)
 const REEL_STEP = 0.8;      // screens of scrolling per slot
 let reelFrame = 0;
 
@@ -118,21 +117,14 @@ function updateReel() {
   const enter = (j) => (j <= 0 ? 1 : Math.min(1, Math.max(0, (progress - (j - 1)) / REEL_OVERLAP)));
   let current = 0;
   items.forEach((item, j) => { if (enter(j) >= 0.5) current = j; });
-  const es = items.map((_, j) => enter(j));
-  let top = 0;
-  es.forEach((e, j) => { if (e > 0) top = j; });
   items.forEach((item, j) => {
-    const e = es[j];
-    // a layer stays visible until a later full-size cover has completely hidden it
-    const smallOne = !item.classList.contains('reel-full');
-    const covered = (smallOne && j + 1 < items.length && es[j + 1] >= 1)
-      || items.some((other, k) => k > j && other.classList.contains('reel-full') && es[k] >= 1);
+    const e = enter(j);
+    const next = j + 1 < items.length ? enter(j + 1) : 0;
     // The pictures never move: each new cover is revealed from the bottom edge upwards,
-    // like a window that opens over what is already there.
+    // like a window that opens over the previous picture.
     item.style.clipPath = `inset(${((1 - e) * 100).toFixed(3)}% 0 0 0)`;
-    item.style.visibility = e <= 0 || covered ? 'hidden' : 'visible';
+    item.style.visibility = e <= 0 || next >= 1 ? 'hidden' : 'visible';
     item.style.zIndex = String(j + 1);
-    item.classList.toggle('is-top', j === top);
     item.style.pointerEvents = j === current ? 'auto' : 'none';
     item.tabIndex = j === current ? 0 : -1;
   });

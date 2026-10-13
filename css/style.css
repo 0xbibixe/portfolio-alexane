@@ -147,8 +147,7 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   background: var(--bg);
 }
 .reel-item {
-  position: absolute;
-  inset: var(--t, 0) var(--r, 0) var(--b, 0) var(--l, 0);
+  position: absolute; inset: 0;
   display: block;
   overflow: hidden;
   background: #111;
@@ -161,10 +160,6 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   background: linear-gradient(to top, rgba(5,5,5,0.55), rgba(5,5,5,0) 38%);
   pointer-events: none;
 }
-.reel-full { --t: 0; }
-.reel-tall { --t: 10vh; }
-.reel-mid { --t: 26vh; }
-.reel-short { --t: 42vh; }
 .reel-cap {
   position: absolute; z-index: 1;
   left: var(--gutter);
@@ -176,8 +171,6 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   text-transform: uppercase;
   line-height: 1.25;
 }
-.reel-cap { opacity: 0; transition: opacity 0.3s; }
-.reel-item.is-top .reel-cap { opacity: 1; }
 .reel-cap .num { color: var(--fg); opacity: 0.7; }
 .reel-cap .sub { opacity: 0.7; }
 
