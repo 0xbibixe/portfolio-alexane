@@ -111,7 +111,11 @@ function setIndexMode(mode) {
 const ease = (t) => { const k = t * t * (3 - 2 * t); return t * 0.75 + k * 0.25; };  // nearly linear so the bands stay evenly spaced
 const REEL_OVERLAP = 2.4;    // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
 const REEL_STEP = 0.55;     // screens of scrolling per slot
-const REEL_PEEK = 0.15;      // share of the screen (from the bottom) where the next picture is always visible
+const REEL_SPANS = [1.25, 0.8, 1.1, 0.7, 1.2, 0.9];   // each cover opens over its own length, so the bands get different heights
+const REEL_PEEKS = [0.12, 0.28, 0.18, 0.32, 0.14, 0.24]; // share of the screen (from the bottom) where the next picture always shows
+const reelSpan = (j) => REEL_OVERLAP * REEL_SPANS[j % REEL_SPANS.length];
+const reelPeek = (j) => REEL_PEEKS[j % REEL_PEEKS.length];
+const reelUnits = (n) => { let u = n - 1; for (let j = 1; j < n; j++) u = Math.max(u, j - 1 + reelSpan(j)); return u; };
 let reelFrame = 0;
 
 function layoutReel() {
@@ -119,7 +123,7 @@ function layoutReel() {
   const n = root.querySelectorAll('.reel-item').length;
   const stage = root.querySelector('.reel-stage');
   if (state.indexMode === 'reel') {
-    const units = n - 1 + (REEL_OVERLAP - 1);
+    const units = reelUnits(n);
     root.style.height = `${Math.round(stage.offsetHeight * (1 + units * REEL_STEP))}px`;
   } else {
     root.style.height = '';
@@ -135,11 +139,11 @@ function updateReel() {
   const stage = root.querySelector('.reel-stage');
   const total = Math.max(1, root.offsetHeight - stage.offsetHeight);
   const scrolled = -root.getBoundingClientRect().top;
-  const units = items.length - 1 + (REEL_OVERLAP - 1);
+  const units = reelUnits(items.length);
   const progress = Math.min(1, Math.max(0, scrolled / total)) * units;
-  const raw = (j) => (j <= 0 ? 1 : ease(Math.min(1, Math.max(0, (progress - (j - 1)) / REEL_OVERLAP))));
+  const raw = (j) => (j <= 0 ? 1 : ease(Math.min(1, Math.max(0, (progress - (j - 1)) / reelSpan(j)))));
   // a sliver of the next picture always shows at the bottom edge, so two pictures are visible together even at rest
-  const enter = (j) => (j <= 0 ? 1 : Math.max(raw(j), j === 1 || raw(j - 1) > 0.02 ? REEL_PEEK * Math.min(1, raw(j - 1) * 4) : 0));
+  const enter = (j) => (j <= 0 ? 1 : Math.max(raw(j), j === 1 || raw(j - 1) > 0.02 ? reelPeek(j) * Math.min(1, raw(j - 1) * 4) : 0));
   let current = 0;
   items.forEach((item, j) => { if (enter(j) >= 0.5) current = j; });
   items.forEach((item, j) => {
