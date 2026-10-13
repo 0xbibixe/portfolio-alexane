@@ -109,8 +109,8 @@ function setIndexMode(mode) {
 
 /* ── Reel: full-screen covers stacked as layers; each one slides up over the others while scrolling ── */
 const ease = (t) => t * t * (3 - 2 * t);
-const REEL_OVERLAP = 1.5;   // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
-const REEL_STEP = 1.0;      // screens of scrolling per slot
+const REEL_OVERLAP = 1.15;   // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
+const REEL_STEP = 0.8;      // screens of scrolling per slot
 let reelFrame = 0;
 
 function layoutReel() {
@@ -136,7 +136,7 @@ function updateReel() {
   const scrolled = -root.getBoundingClientRect().top;
   const units = items.length - 1 + (REEL_OVERLAP - 1);
   const progress = Math.min(1, Math.max(0, scrolled / total)) * units;
-  const enter = (j) => (j <= 0 ? 1 : Math.min(1, Math.max(0, (progress - (j - 1)) / REEL_OVERLAP)));
+  const enter = (j) => (j <= 0 ? 1 : ease(Math.min(1, Math.max(0, (progress - (j - 1)) / REEL_OVERLAP))));
   let current = 0;
   items.forEach((item, j) => { if (enter(j) >= 0.5) current = j; });
   items.forEach((item, j) => {
