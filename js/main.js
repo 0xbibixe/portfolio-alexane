@@ -111,8 +111,8 @@ function setIndexMode(mode) {
 const ease = (t) => { const k = t * t * (3 - 2 * t); return t * 0.75 + k * 0.25; };  // nearly linear so the bands stay evenly spaced
 const REEL_OVERLAP = 2.4;    // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
 const REEL_STEP = 0.55;     // screens of scrolling per slot
-const REEL_SPANS = [1.25, 0.8, 1.1, 0.7, 1.2, 0.9];   // each cover opens over its own length, so the bands get different heights
-const REEL_PEEKS = [0.12, 0.28, 0.18, 0.32, 0.14, 0.24]; // share of the screen (from the bottom) where the next picture always shows
+const REEL_SPANS = [1.25, 0.8, 1.5, 1.4, 1.2, 0.9];   // each cover opens over its own length, so the bands get different heights
+const REEL_PEEKS = [0.12, 0.28, 0.32, 0.3, 0.14, 0.24]; // share of the screen (from the bottom) where the next picture always shows
 const reelSpan = (j) => REEL_OVERLAP * REEL_SPANS[j % REEL_SPANS.length];
 const reelPeek = (j) => REEL_PEEKS[j % REEL_PEEKS.length];
 const reelUnits = (n) => { let u = n - 1; for (let j = 1; j < n; j++) u = Math.max(u, j - 1 + reelSpan(j)); return u; };
