@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=85';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=86';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -32,7 +32,7 @@ function img([src, w, h], alt, eager = false) {
 }
 
 /* ── State ─────────────────────────────────────────────── */
-const state = { view: HOME, filter: 'all', lastTrigger: null, back: null, parentScroll: null, indexMode: 'reel' };
+const state = { view: HOME, filter: 'all', lastTrigger: null, back: null, parentScroll: null, indexMode: 'reel', keepGrid: false };
 
 /* ── Wordmark: scale text to fill header width ─────────── */
 function fitWordmark() {
@@ -148,7 +148,10 @@ function renderFilterbar() {
 }
 
 function onFilter(id) {
-  if (state.view !== HOME || !$('#project').hidden) location.hash = `#${HOME}`;
+  if (state.view !== HOME || !$('#project').hidden) {
+    state.keepGrid = true;
+    location.hash = `#${HOME}`;
+  }
   applyFilter(id);
   setIndexMode('grid');
   goToContent(true);
@@ -322,6 +325,16 @@ function route() {
   }
   closeProject();
   const view = VIEWS.includes(hash) ? hash : HOME;
+  // Coming back to the home page always shows the scrolling reel again,
+  // except when the filter menu just asked for the grid.
+  if (view === HOME) {
+    if (state.keepGrid) state.keepGrid = false;
+    else if (state.indexMode === 'grid') {
+      applyFilter('all');
+      setIndexMode('reel');
+      goToContent(false);
+    }
+  }
   if (view !== state.view || !document.querySelector('.nav a.is-active')) {
     const first = !document.querySelector('.nav a.is-active');
     showView(view);
