@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=87';
+import { PROJECTS, SHOOTS, MOBILE_COVERS, CATEGORIES } from './data.js?v=87';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -44,10 +44,35 @@ function fitWordmark() {
 }
 
 /* ── Render: INDEX (numbered grid) ─────────────────────── */
+const phone = matchMedia('(max-width: 600px)');
+
+/* Reel of the All page. On phones it uses vertical pictures (MOBILE_COVERS) and skips projects without one. */
+function fillReel(stage) {
+  stage.replaceChildren();
+  PROJECTS.forEach((p, i) => {
+    const mobile = phone.matches ? MOBILE_COVERS[p.slug] : null;
+    if (phone.matches && !mobile) return;
+    stage.append(
+      el('a', { class: 'reel-item', href: `#p/${p.slug}`, 'aria-label': p.title }, [
+        img(mobile ?? p.cover ?? p.images[0], p.title, true),
+        el('div', { class: 'reel-cap' }, [
+          el('span', { class: 'num', text: pad(i) }),
+          el('span', {}, [
+            el('span', { class: 't', text: p.title }),
+            el('br'),
+            el('span', { class: 'sub', text: p.tag }),
+          ]),
+        ]),
+      ]),
+    );
+  });
+}
+
 function renderIndex() {
   const root = $('#view-index');
   const stage = el('div', { class: 'reel-stage' });
   const grid = el('div', { class: 'idx-grid' });
+  fillReel(stage);
   PROJECTS.forEach((p, i) => {
     const cats = p.cats.join(' ');
     const cap = [
@@ -58,12 +83,6 @@ function renderIndex() {
         el('span', { class: 'sub', text: p.tag }),
       ]),
     ];
-    stage.append(
-      el('a', { class: 'reel-item', href: `#p/${p.slug}`, 'aria-label': p.title }, [
-        img(p.cover ?? p.images[0], p.title, true),
-        el('div', { class: 'reel-cap' }, cap.map((n) => n.cloneNode(true))),
-      ]),
-    );
     grid.append(
       el('a', { class: 'idx-item', href: `#p/${p.slug}`, 'data-cats': cats }, [
         el('div', { class: 'frame' }, [img(p.cover ?? p.images[0], p.title, i < 3)]),
@@ -73,6 +92,7 @@ function renderIndex() {
   });
   root.append(stage, grid);
   setIndexMode('reel');
+  phone.addEventListener('change', () => { fillReel(stage); layoutReel(); });
 }
 
 /* The index has two layouts: the scroll-driven reel (default, straight after the intro)

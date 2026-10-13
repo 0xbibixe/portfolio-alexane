@@ -350,3 +350,16 @@ export const SHOOTS = [
     credits: [],
   },
 ];
+
+/* Vertical covers used by the All page on phones (no entry = project not shown there). */
+export const MOBILE_COVERS = {
+  'acne-diaries': ['images/m_acne-diaries.jpg', 1080, 1350],
+  'beau-magazine': ['images/m_beau-magazine.jpg', 1800, 2250],
+  'blurry-papers': ['images/m_blurry-papers.jpg', 1800, 2025],
+  'brand-image-communication': ['images/m_brand-image-communication.jpg', 1800, 2250],
+  'coperni-fw23-print': ['images/m_coperni-fw23-print.jpg', 1536, 2048],
+  'coperni-fw25': ['images/m_coperni-fw25.jpg', 1799, 2400],
+  'coperni-resort-26': ['images/m_coperni-resort-26.jpg', 1600, 2400],
+  'loewe-editorial': ['images/m_loewe-editorial.jpg', 1600, 2400],
+  'shows-shootings': ['images/m_shows-shootings.jpg', 1800, 1440],
+};
