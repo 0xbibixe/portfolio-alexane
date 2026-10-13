@@ -87,8 +87,8 @@ function setIndexMode(mode) {
 
 /* ── Reel: full-screen covers stacked as layers; each one slides up over the others while scrolling ── */
 const ease = (t) => t * t * (3 - 2 * t);
-const REEL_OVERLAP = 2.3;   // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
-const REEL_STEP = 0.8;      // screens of scrolling per slot
+const REEL_OVERLAP = 1.5;   // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
+const REEL_STEP = 1.0;      // screens of scrolling per slot
 let reelFrame = 0;
 
 function layoutReel() {
