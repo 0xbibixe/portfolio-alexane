@@ -109,8 +109,9 @@ function setIndexMode(mode) {
 
 /* ── Reel: full-screen covers stacked as layers; each one slides up over the others while scrolling ── */
 const ease = (t) => { const k = t * t * (3 - 2 * t); return t * 0.75 + k * 0.25; };  // nearly linear so the bands stay evenly spaced
-const REEL_OVERLAP = 2.8;    // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
+const REEL_OVERLAP = 2.4;    // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
 const REEL_STEP = 0.55;     // screens of scrolling per slot
+const REEL_PEEK = 0.15;      // share of the screen (from the bottom) where the next picture is always visible
 let reelFrame = 0;
 
 function layoutReel() {
@@ -136,12 +137,14 @@ function updateReel() {
   const scrolled = -root.getBoundingClientRect().top;
   const units = items.length - 1 + (REEL_OVERLAP - 1);
   const progress = Math.min(1, Math.max(0, scrolled / total)) * units;
-  const enter = (j) => (j <= 0 ? 1 : ease(Math.min(1, Math.max(0, (progress - (j - 1)) / REEL_OVERLAP))));
+  const raw = (j) => (j <= 0 ? 1 : ease(Math.min(1, Math.max(0, (progress - (j - 1)) / REEL_OVERLAP))));
+  // a sliver of the next picture always shows at the bottom edge, so two pictures are visible together even at rest
+  const enter = (j) => (j <= 0 ? 1 : Math.max(raw(j), j === 1 || raw(j - 1) > 0.02 ? REEL_PEEK * Math.min(1, raw(j - 1) * 4) : 0));
   let current = 0;
   items.forEach((item, j) => { if (enter(j) >= 0.5) current = j; });
   items.forEach((item, j) => {
     const e = enter(j);
-    const next = j + 1 < items.length ? enter(j + 1) : 0;
+    const next = j + 1 < items.length ? raw(j + 1) : 0;
     // The pictures never move: each new cover is revealed from the bottom edge upwards,
     // like a window that opens over the previous picture.
     item.style.clipPath = `inset(${((1 - e) * 100).toFixed(3)}% 0 0 0)`;
