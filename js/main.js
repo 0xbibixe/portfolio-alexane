@@ -32,7 +32,7 @@ function img([src, w, h], alt, eager = false) {
 }
 
 /* ── State ─────────────────────────────────────────────── */
-const state = { view: HOME, filter: 'all', lastTrigger: null, back: null, parentScroll: null, indexMode: 'reel', keepGrid: false };
+const state = { view: HOME, filter: 'all', lastTrigger: null, back: null, parentScroll: null, indexMode: 'reel' };
 
 /* ── Wordmark: scale text to fill header width ─────────── */
 function fitWordmark() {
@@ -145,13 +145,11 @@ function renderFilterbar() {
   });
 }
 
+/* "All" is the home page (intro + scrolling reel); every other category opens its own grid of projects. */
 function onFilter(id) {
-  if (state.view !== HOME || !$('#project').hidden) {
-    state.keepGrid = true;
-    location.hash = `#${HOME}`;
-  }
+  if (state.view !== HOME || !$('#project').hidden) location.hash = `#${HOME}`;
   applyFilter(id);
-  setIndexMode('grid');
+  setIndexMode(id === 'all' ? 'reel' : 'grid');
   goToContent(true);
 }
 
@@ -323,16 +321,6 @@ function route() {
   }
   closeProject();
   const view = VIEWS.includes(hash) ? hash : HOME;
-  // Coming back to the home page always shows the scrolling reel again,
-  // except when the filter menu just asked for the grid.
-  if (view === HOME) {
-    if (state.keepGrid) state.keepGrid = false;
-    else if (state.indexMode === 'grid') {
-      applyFilter('all');
-      setIndexMode('reel');
-      goToContent(false);
-    }
-  }
   if (view !== state.view || !document.querySelector('.nav a.is-active')) {
     const first = !document.querySelector('.nav a.is-active');
     showView(view);
