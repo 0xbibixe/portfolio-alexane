@@ -108,9 +108,9 @@ function setIndexMode(mode) {
 }
 
 /* ── Reel: full-screen covers stacked as layers; each one slides up over the others while scrolling ── */
-const ease = (t) => t * t * (3 - 2 * t);
-const REEL_OVERLAP = 1.15;   // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
-const REEL_STEP = 0.8;      // screens of scrolling per slot
+const ease = (t) => { const k = t * t * (3 - 2 * t); return t * 0.45 + k * 0.55; };  // mostly linear, soft ends
+const REEL_OVERLAP = 1.7;    // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
+const REEL_STEP = 0.85;     // screens of scrolling per slot
 let reelFrame = 0;
 
 function layoutReel() {
@@ -146,6 +146,9 @@ function updateReel() {
     // like a window that opens over the previous picture.
     item.style.clipPath = `inset(${((1 - e) * 100).toFixed(3)}% 0 0 0)`;
     item.style.visibility = e <= 0 || next >= 1 ? 'hidden' : 'visible';
+    // depth: the picture being covered dims and drifts up slightly under the one opening over it
+    item.style.setProperty('--dim', (next * 0.55).toFixed(3));
+    item.firstElementChild.style.transform = next > 0 ? `translate3d(0, ${(-next * 4).toFixed(3)}%, 0)` + ` scale(${(1 + next * 0.05).toFixed(4)})` : '';
     item.style.zIndex = String(j + 1);
     item.style.pointerEvents = j === current ? 'auto' : 'none';
     item.tabIndex = j === current ? 0 : -1;
