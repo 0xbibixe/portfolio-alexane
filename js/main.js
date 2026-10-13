@@ -44,12 +44,39 @@ function fitWordmark() {
 }
 
 /* ── Render: INDEX (numbered grid) ─────────────────────── */
+/* Pictures shown in the reel for a project: its cover plus up to two more landscape images. */
+function reelPictures(p) {
+  const cover = p.cover ?? p.images[0];
+  const others = p.images.filter((im) => im[0] !== cover[0]);
+  const landscape = others.filter(([, w, h]) => w > h * 1.1);
+  const pool = landscape.length ? landscape : others.slice(0, 1);
+  const extras = pool.length > 2 ? [pool[Math.floor(pool.length / 3)], pool[Math.floor((2 * pool.length) / 3)]] : pool;
+  return [cover, ...extras].slice(0, 3);
+}
+
 function renderIndex() {
   const root = $('#view-index');
   const stage = el('div', { class: 'reel-stage' });
   const grid = el('div', { class: 'idx-grid' });
   PROJECTS.forEach((p, i) => {
     const cats = p.cats.join(' ');
+    if (p.slug !== 'windows-display') {
+      reelPictures(p).forEach((picture, k) => {
+        stage.append(
+          el('a', { class: 'reel-item', href: `#p/${p.slug}`, 'aria-label': p.title }, [
+            img(picture, p.title, true),
+            el('div', { class: 'reel-cap' }, [
+              el('span', { class: 'num', text: pad(i) }),
+              el('span', {}, [
+                el('span', { class: 't', text: p.title }),
+                el('br'),
+                el('span', { class: 'sub', text: p.tag }),
+              ]),
+            ]),
+          ]),
+        );
+      });
+    }
     const cap = [
       el('span', { class: 'num', text: pad(i) }),
       el('span', {}, [
@@ -58,12 +85,6 @@ function renderIndex() {
         el('span', { class: 'sub', text: p.tag }),
       ]),
     ];
-    stage.append(
-      el('a', { class: 'reel-item', href: `#p/${p.slug}`, 'aria-label': p.title }, [
-        img(p.cover ?? p.images[0], p.title, true),
-        el('div', { class: 'reel-cap' }, cap.map((n) => n.cloneNode(true))),
-      ]),
-    );
     grid.append(
       el('a', { class: 'idx-item', href: `#p/${p.slug}`, 'data-cats': cats }, [
         el('div', { class: 'frame' }, [img(p.cover ?? p.images[0], p.title, i < 3)]),
