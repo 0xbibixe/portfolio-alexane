@@ -371,18 +371,6 @@ new IntersectionObserver(([entry]) => {
   document.body.classList.toggle('on-landing', entry.intersectionRatio > 0.35);
 }, { threshold: [0, 0.35, 0.36, 1] }).observe(landing);
 
-/* Landing slideshow: crossfades through the backdrop images (still image if motion is reduced) */
-const slides = [...document.querySelectorAll('.landing-bg')];
-if (slides.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  let current = 0;
-  setInterval(() => {
-    if (document.hidden || !document.body.classList.contains('on-landing')) return;
-    slides[current].classList.remove('is-active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('is-active');
-  }, 2800);
-}
-
 /* Slightly slower, smoothed mouse-wheel / trackpad scrolling (touch keeps its native momentum). */
 const WHEEL_SPEED = 0.7;   // 1 = native
 const WHEEL_GLIDE = 150;  // ms: higher = longer, softer glide
