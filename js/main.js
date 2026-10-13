@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=83';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=84';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -46,11 +46,12 @@ function fitWordmark() {
 /* ── Render: INDEX (numbered grid) ─────────────────────── */
 function renderIndex() {
   const root = $('#view-index');
+  const stage = el('div', { class: 'reel-stage' });
   PROJECTS.forEach((p, i) => {
-    root.append(
-      el('a', { class: 'idx-item', href: `#p/${p.slug}`, 'data-cats': p.cats.join(' ') }, [
-        el('div', { class: 'frame' }, [img(p.cover ?? p.images[0], p.title, i < 3)]),
-        el('div', { class: 'idx-cap' }, [
+    stage.append(
+      el('a', { class: 'reel-item', href: `#p/${p.slug}`, 'data-cats': p.cats.join(' '), 'aria-label': p.title }, [
+        img(p.cover ?? p.images[0], p.title, true),
+        el('div', { class: 'reel-cap' }, [
           el('span', { class: 'num', text: pad(i) }),
           el('span', {}, [
             el('span', { class: 't', text: p.title }),
@@ -61,7 +62,46 @@ function renderIndex() {
       ]),
     );
   });
+  root.append(stage);
 }
+
+/* ── Reel: full-screen project covers that slide up over each other while scrolling ── */
+const ease = (t) => t * t * (3 - 2 * t);
+let reelFrame = 0;
+
+function layoutReel() {
+  const root = $('#view-index');
+  const items = [...root.querySelectorAll('.reel-item')].filter((i) => !i.classList.contains('is-out'));
+  root.style.setProperty('--n', String(Math.max(1, items.length)));
+  updateReel();
+}
+
+function updateReel() {
+  reelFrame = 0;
+  const root = $('#view-index');
+  if (root.hidden) return;
+  const items = [...root.querySelectorAll('.reel-item')].filter((i) => !i.classList.contains('is-out'));
+  if (!items.length) return;
+  const stage = root.firstElementChild;
+  const total = Math.max(1, root.offsetHeight - stage.offsetHeight);
+  const scrolled = -root.getBoundingClientRect().top;
+  const progress = Math.min(1, Math.max(0, scrolled / total)) * (items.length - 1);
+  const enter = (j) => (j <= 0 ? 1 : ease(Math.min(1, Math.max(0, progress - (j - 1)))));
+  const current = Math.round(progress);
+  items.forEach((item, j) => {
+    const y = (1 - enter(j)) * 100 - 14 * (j + 1 < items.length ? enter(j + 1) : 0);
+    const hidden = y >= 100 || (j + 1 < items.length && enter(j + 1) >= 1);
+    item.style.transform = `translate3d(0, ${y.toFixed(3)}%, 0)`;
+    item.style.visibility = hidden ? 'hidden' : 'visible';
+    item.style.zIndex = String(j + 1);
+    item.style.pointerEvents = j === current ? 'auto' : 'none';
+    item.tabIndex = j === current ? 0 : -1;
+  });
+}
+
+const queueReel = () => { if (!reelFrame) reelFrame = requestAnimationFrame(updateReel); };
+window.addEventListener('scroll', queueReel, { passive: true });
+window.addEventListener('resize', queueReel);
 
 /* ── Filter ────────────────────────────────────────────── */
 function renderFilterbar() {
@@ -77,7 +117,7 @@ function renderFilterbar() {
 function onFilter(id) {
   if (state.view !== HOME || !$('#project').hidden) location.hash = `#${HOME}`;
   applyFilter(id);
-  if (document.body.classList.contains('on-landing')) goToContent(true);
+  goToContent(true);
 }
 
 function applyFilter(id) {
@@ -86,17 +126,11 @@ function applyFilter(id) {
     b.setAttribute('aria-pressed', String(b.dataset.filter === id));
   });
 
-  let visible = 0;
-  document.querySelectorAll('#view-index .idx-item').forEach((item) => {
+  document.querySelectorAll('#view-index .reel-item').forEach((item) => {
     const match = id === 'all' || item.dataset.cats.split(' ').includes(id);
     item.classList.toggle('is-out', !match);
-    item.classList.remove('is-in');
-    if (!match) return;
-    void item.offsetWidth; // restart entry animation
-    item.classList.add('is-in');
-    item.style.animationDelay = `${Math.min(visible, 6) * 60}ms`;
-    visible += 1;
   });
+  layoutReel();
 }
 
 /* ── Project overlay ───────────────────────────────────── */
@@ -237,6 +271,7 @@ function showView(view) {
     else a.removeAttribute('aria-current');
   });
   $('#filterbar').classList.toggle('is-hidden', view === 'info');
+  if (view === HOME) queueReel();
 }
 
 function route() {
