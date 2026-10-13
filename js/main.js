@@ -1,4 +1,4 @@
-import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=88';
+import { PROJECTS, SHOOTS, CATEGORIES } from './data.js?v=89';
 
 const VIEWS = ['index', 'info'];
 const HOME = 'index';
@@ -88,7 +88,7 @@ function setIndexMode(mode) {
 /* ── Reel: full-screen covers stacked as layers; each one slides up over the others while scrolling ── */
 const ease = (t) => t * t * (3 - 2 * t);
 const REEL_OVERLAP = 2.3;   // how many "slots" of scroll a cover takes to slide in (>1 = several layers in flight at once)
-const REEL_SIZES = ['full', 'right', 'full', 'center', 'left', 'full', 'frame', 'right', 'full', 'center']; // size of each cover's window
+const REEL_SIZES = ['full', 'mid', 'tall', 'full', 'short', 'tall', 'full', 'mid', 'tall', 'full']; // height of each cover's window (always full width)
 const REEL_STEP = 0.8;      // screens of scrolling per slot
 let reelFrame = 0;
 

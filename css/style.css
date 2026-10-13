@@ -161,11 +161,10 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   background: linear-gradient(to top, rgba(5,5,5,0.55), rgba(5,5,5,0) 38%);
   pointer-events: none;
 }
-.reel-full { --t: 0; --r: 0; --b: 0; --l: 0; }
-.reel-frame { --t: 6vh; --r: 6vw; --b: 6vh; --l: 6vw; }
-.reel-center { --t: 14vh; --r: 22vw; --b: 14vh; --l: 22vw; }
-.reel-right { --t: 12vh; --r: 5vw; --b: 12vh; --l: 38vw; }
-.reel-left { --t: 12vh; --r: 38vw; --b: 12vh; --l: 5vw; }
+.reel-full { --t: 0; }
+.reel-tall { --t: 10vh; }
+.reel-mid { --t: 26vh; }
+.reel-short { --t: 42vh; }
 .reel-cap {
   position: absolute; z-index: 1;
   left: var(--gutter);
@@ -353,10 +352,6 @@ body.is-locked:not(.at-project-end) .filterbar { transform: translateY(100%); op
 }
 
 @media (max-width: 600px) {
-  .reel-frame { --t: 4vh; --r: 4vw; --b: 4vh; --l: 4vw; }
-  .reel-center { --t: 14vh; --r: 10vw; --b: 14vh; --l: 10vw; }
-  .reel-right { --t: 16vh; --r: 4vw; --b: 12vh; --l: 22vw; }
-  .reel-left { --t: 16vh; --r: 22vw; --b: 12vh; --l: 4vw; }
   .idx-grid { grid-template-columns: 1fr; }
   .header-row { flex-direction: column; gap: 6px; }
   .p-meta .tagcol, .p-meta .desc, .p-meta .credits { grid-column: 1 / 13; }
