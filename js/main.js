@@ -376,8 +376,73 @@ document.addEventListener('click', (e) => {
 const leaveProject = () => { location.hash = state.back ?? `#${state.view}`; };
 $('#p-close').addEventListener('click', leaveProject);
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !$('#project').hidden) leaveProject();
+  if (e.key === 'Escape' && !$('#project').hidden && $('#lightbox').hidden) leaveProject();
 });
+
+/* ── Lightbox: click any gallery picture to see it full page, click again to zoom ── */
+const lightbox = el('div', { class: 'lightbox', id: 'lightbox', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Image en plein écran', hidden: '' }, [
+  el('div', { class: 'lb-scroll' }, [el('img', { class: 'lb-img', alt: '', draggable: 'false' })]),
+  el('button', { class: 'lb-close', type: 'button', 'aria-label': 'Fermer', text: '×' }),
+  el('button', { class: 'lb-nav lb-prev', type: 'button', 'aria-label': 'Image précédente', text: '←' }),
+  el('button', { class: 'lb-nav lb-next', type: 'button', 'aria-label': 'Image suivante', text: '→' }),
+  el('span', { class: 'lb-count' }),
+]);
+document.body.append(lightbox);
+const lbScroll = lightbox.querySelector('.lb-scroll');
+const lbImg = lightbox.querySelector('.lb-img');
+let lbList = [];
+let lbIndex = 0;
+
+const lbShow = (i) => {
+  lbIndex = (i + lbList.length) % lbList.length;
+  const src = lbList[lbIndex];
+  lbImg.src = src.currentSrc || src.src;
+  lbImg.alt = src.alt;
+  lightbox.classList.remove('is-zoomed');
+  lbScroll.scrollTo(0, 0);
+  lightbox.querySelector('.lb-count').textContent = `${lbIndex + 1} / ${lbList.length}`;
+  lightbox.classList.toggle('is-single', lbList.length < 2);
+};
+const lbOpen = (target) => {
+  lbList = [...$('#p-inner').querySelectorAll('figure img')].filter((im) => !im.closest('.shoot-link'));
+  const i = lbList.indexOf(target);
+  if (i < 0) return;
+  lightbox.hidden = false;
+  document.body.classList.add('lb-open');
+  lbShow(i);
+};
+const lbClose = () => {
+  lightbox.hidden = true;
+  lightbox.classList.remove('is-zoomed');
+  document.body.classList.remove('lb-open');
+};
+$('#p-inner').addEventListener('click', (e) => {
+  const picture = e.target.closest('figure img');
+  if (picture && !picture.closest('.shoot-link')) lbOpen(picture);
+});
+lbImg.addEventListener('click', (e) => {
+  const wasZoomed = lightbox.classList.contains('is-zoomed');
+  const r = lbImg.getBoundingClientRect();
+  const fx = (e.clientX - r.left) / r.width;
+  const fy = (e.clientY - r.top) / r.height;
+  lightbox.classList.toggle('is-zoomed', !wasZoomed);
+  if (wasZoomed) { lbScroll.scrollTo(0, 0); return; }
+  // zoom in on the spot that was clicked
+  requestAnimationFrame(() => {
+    lbScroll.scrollTo(fx * lbImg.offsetWidth - lbScroll.clientWidth / 2, fy * lbImg.offsetHeight - lbScroll.clientHeight / 2);
+  });
+});
+lbScroll.addEventListener('click', (e) => { if (e.target === lbScroll && !lightbox.classList.contains('is-zoomed')) lbClose(); });
+lightbox.querySelector('.lb-close').addEventListener('click', lbClose);
+lightbox.querySelector('.lb-prev').addEventListener('click', () => lbShow(lbIndex - 1));
+lightbox.querySelector('.lb-next').addEventListener('click', () => lbShow(lbIndex + 1));
+document.addEventListener('keydown', (e) => {
+  if (lightbox.hidden) return;
+  if (e.key === 'Escape') lbClose();
+  else if (e.key === 'ArrowLeft') lbShow(lbIndex - 1);
+  else if (e.key === 'ArrowRight') lbShow(lbIndex + 1);
+});
+window.addEventListener('hashchange', lbClose);
 
 /* ── Landing: arrow scrolls to the index, UI chrome waits for it ── */
 const landing = $('#landing');
