@@ -160,6 +160,12 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   background: linear-gradient(to top, rgba(5,5,5,0.55), rgba(5,5,5,0) 38%);
   pointer-events: none;
 }
+/* Portrait screens: show more of each (landscape) cover instead of cropping it to a thin slice */
+@media (max-aspect-ratio: 1/1) {
+  .reel-item { background: var(--bg); }
+  .reel-item img { height: 64%; margin-top: 14%; }
+  .reel-item::after { display: none; }
+}
 .reel-cap {
   position: absolute; z-index: 1;
   left: var(--gutter);
