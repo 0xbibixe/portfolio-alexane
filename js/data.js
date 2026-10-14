@@ -446,7 +446,7 @@ export const MOBILE_COVERS = {
   'brand-image-communication': ['images/m_brand-image-communication.jpg', 2240, 2800],
   'coperni-fw23-print': ['images/m_coperni-fw23-print.jpg', 1536, 2048],
   'coperni-fw25': ['images/m_coperni-fw25.jpg', 1799, 2400],
-  'coperni-resort-26': ['images/m_coperni-resort-26.jpg', 1333, 2000],
+  'coperni-resort-26': ['images/m_coperni-resort-26.jpg', 1600, 2000],
   'loewe-editorial': ['images/m_loewe-editorial.jpg', 1867, 2800],
   'shows-shootings': ['images/m_shows-shootings.jpg', 2500, 2000],
 };
