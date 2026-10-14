@@ -237,7 +237,7 @@ export const PROJECTS = [
       ['images/print_look30.jpg', 960, 1440, "[1] — Coperni Fall Winter 23 Show - Look 30"],
       ['images/print_look31.jpg', 960, 1440, "[4] — Coperni Fall Winter 23 Show - Look 31"],
       ['images/print_backstage.jpg', 573, 764, "[2] — Coperni Backstage - Detail"],
-      ['images/print_jacket.jpg', 562, 749, "[3] — Jacket painted by hand by Gaspar Willmann"],
+      ['images/print_jacket.jpg', 1200, 1600, "[3] — Jacket painted by hand by Gaspar Willmann"],
       ['images/print_kylie.jpg', 600, 750, "[5] — Kylie Jenner wearing the DALL-E print leather jacket shot by Oliver Hadlee Pearch"],
       ['images/print_bag.jpg', 565, 754, "[6] — Bag painted by hand by Gaspar Willmann"],
     ],
