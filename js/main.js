@@ -223,8 +223,11 @@ function buildGallery(p) {
       const [season, detail] = (image[3] ?? '').split(' — ');
       const picture = img(image, `${p.title} — ${season || `image ${idx[k] + 1}`}`, idx[0] === 0);
       const link = image[4];
+      const film = image[5];   // HLS playlist of a film shown when the picture is clicked
       const fig = el('figure', { style: `--ar: ${(image[1] / image[2]).toFixed(4)}` }, [
-        link ? el('a', { class: 'shoot-link', href: `#p/${link}`, 'aria-label': `${season || p.title} — voir tout le shooting` }, [picture]) : picture,
+        link ? el('a', { class: 'shoot-link', href: `#p/${link}`, 'aria-label': `${season || p.title} — voir tout le shooting` }, [picture])
+          : film ? el('button', { class: 'video-link', type: 'button', 'data-film': film, 'aria-label': `${season || p.title} — lire le film` }, [picture, el('span', { class: 'play', 'aria-hidden': 'true', text: '▶' })])
+            : picture,
       ]);
       if (imgs.length === 1 && !p.cols) fig.style.maxWidth = `${image[1]}px`;
       if (image[3]) {
@@ -232,6 +235,7 @@ function buildGallery(p) {
           el('span', { text: season }),
           ...(detail ? [el('br'), el('span', { class: 'mute', text: detail })] : []),
           ...(link ? [el('br'), el('a', { class: 'view-shoot', href: `#p/${link}`, text: 'View shoot →' })] : []),
+          ...(film ? [el('br'), el('button', { class: 'view-shoot', type: 'button', 'data-film': film, text: 'Watch film →' })] : []),
         ]));
       }
       row.append(fig);
@@ -381,7 +385,7 @@ document.addEventListener('click', (e) => {
 const leaveProject = () => { location.hash = state.back ?? `#${state.view}`; };
 $('#p-close').addEventListener('click', leaveProject);
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !$('#project').hidden && $('#lightbox').hidden) leaveProject();
+  if (e.key === 'Escape' && !$('#project').hidden && $('#lightbox').hidden && $('#filmbox')?.hidden !== false) leaveProject();
 });
 
 /* ── Lightbox: click any gallery picture to see it full page, click again to zoom ── */
@@ -409,7 +413,7 @@ const lbShow = (i) => {
   lightbox.classList.toggle('is-single', lbList.length < 2);
 };
 const lbOpen = (target) => {
-  lbList = [...$('#p-inner').querySelectorAll('figure img')].filter((im) => !im.closest('.shoot-link'));
+  lbList = [...$('#p-inner').querySelectorAll('figure img')].filter((im) => !im.closest('.shoot-link, .video-link'));
   const i = lbList.indexOf(target);
   if (i < 0) return;
   lightbox.hidden = false;
@@ -423,7 +427,7 @@ const lbClose = () => {
 };
 $('#p-inner').addEventListener('click', (e) => {
   const picture = e.target.closest('figure img');
-  if (picture && !picture.closest('.shoot-link')) lbOpen(picture);
+  if (picture && !picture.closest('.shoot-link, .video-link')) lbOpen(picture);
 });
 lbImg.addEventListener('click', (e) => {
   const wasZoomed = lightbox.classList.contains('is-zoomed');
@@ -448,6 +452,49 @@ document.addEventListener('keydown', (e) => {
   else if (e.key === 'ArrowRight') lbShow(lbIndex + 1);
 });
 window.addEventListener('hashchange', lbClose);
+
+/* ── Film player: a click on a picture linked to a film plays it full screen (HLS, light segments) ── */
+const filmbox = el('div', { class: 'filmbox', id: 'filmbox', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Film', hidden: '' }, [
+  el('video', { class: 'film', controls: '', playsinline: '', preload: 'none' }),
+  el('button', { class: 'lb-close', type: 'button', 'aria-label': 'Fermer', text: '×' }),
+]);
+document.body.append(filmbox);
+const filmEl = filmbox.querySelector('video');
+let hls = null;
+const HLS_LIB = 'https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js';
+const loadHls = () => new Promise((ok, fail) => {
+  if (window.Hls) return ok(window.Hls);
+  const sc = el('script', { src: HLS_LIB });
+  sc.onload = () => ok(window.Hls); sc.onerror = fail; document.head.append(sc);
+});
+async function filmOpen(src) {
+  filmbox.hidden = false;
+  document.body.classList.add('lb-open');
+  if (filmEl.canPlayType('application/vnd.apple.mpegurl')) {
+    filmEl.src = src;
+  } else {
+    try {
+      const Hls = await loadHls();
+      if (Hls.isSupported()) { hls = new Hls(); hls.loadSource(src); hls.attachMedia(filmEl); }
+    } catch { /* offline: the controls stay empty */ }
+  }
+  filmEl.play().catch(() => {});
+}
+function filmClose() {
+  filmEl.pause();
+  if (hls) { hls.destroy(); hls = null; }
+  filmEl.removeAttribute('src'); filmEl.load();
+  filmbox.hidden = true;
+  document.body.classList.remove('lb-open');
+}
+$('#p-inner').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-film]');
+  if (b) filmOpen(b.dataset.film);
+});
+filmbox.querySelector('.lb-close').addEventListener('click', filmClose);
+filmbox.addEventListener('click', (e) => { if (e.target === filmbox) filmClose(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !filmbox.hidden) filmClose(); });
+window.addEventListener('hashchange', () => { if (!filmbox.hidden) filmClose(); });
 
 /* ── Landing: arrow scrolls to the index, UI chrome waits for it ── */
 const landing = $('#landing');

@@ -447,3 +447,20 @@ body.lb-open { overflow: hidden; }
 .p-rows figure img, .p-row figure > img { cursor: zoom-in; }
 .p-rows figure .shoot-link img { cursor: pointer; }
 @media (max-width: 600px) { .lightbox.is-zoomed .lb-img { width: 260vw; } }
+
+/* ── Film player + picture linked to a film ── */
+.video-link { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; }
+.video-link .play {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 64px; height: 64px; border-radius: 50%;
+  display: grid; place-items: center; padding-left: 4px;
+  background: rgba(8, 8, 8, 0.55); color: var(--fg);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 248, 239, 0.5);
+  font-size: 22px; transition: transform 0.4s var(--ease), background 0.3s;
+}
+.video-link:hover .play { transform: translate(-50%, -50%) scale(1.1); background: rgba(8, 8, 8, 0.75); }
+.view-shoot[data-film] { background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; }
+.filmbox { position: fixed; inset: 0; z-index: 210; background: #000; display: grid; place-items: center; }
+.filmbox[hidden] { display: none; }
+.filmbox .film { width: 100vw; height: 100vh; height: 100svh; background: #000; object-fit: contain; }

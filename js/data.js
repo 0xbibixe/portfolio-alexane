@@ -177,8 +177,8 @@ export const PROJECTS = [
     cover: ['images/show_cover_lan.jpg', 2000, 1600],
     rows: [[0, 1, 2, 3]],
     images: [
-      ['images/show_fw23.jpg', 998, 1248, 'Coperni Fall Winter 23 Show — Boston Dynamics Robots choreography'],
-      ['images/show_ss25.jpg', 998, 1248, 'Coperni Spring Summer 25 Show — Disneyland Paris'],
+      ['images/show_fw23.jpg', 998, 1248, 'Coperni Fall Winter 23 Show — Boston Dynamics Robots choreography', null, 'video/fw23/index.m3u8'],
+      ['images/show_ss25.jpg', 998, 1248, 'Coperni Spring Summer 25 Show — Disneyland Paris', null, 'video/ss25/index.m3u8'],
       ['images/show_fw25.jpg', 999, 1248, 'Coperni Fall Winter 25 Show — Gamers Lan Party contest'],
       ['images/show_ss26.jpg', 998, 1248, 'Coperni Spring Summer 26 Show'],
     ],
