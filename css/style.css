@@ -364,6 +364,8 @@ body.is-locked:not(.at-project-end) .filterbar { transform: translateY(100%); op
   .p-row figure { flex: 1 1 100%; }
   .p-row.has-caps { gap: 20px var(--gutter); }
   .p-row.has-caps figure { flex: 1 1 calc(50% - var(--gutter)); }
+  .p-row.is-pair { flex-wrap: nowrap; }
+  .p-row.is-pair figure { flex: 1 1 0; min-width: 0; }
   .p-rows.has-cols .p-row figure { flex: 0 0 calc((100% - var(--gutter)) / 2); }
   .filterbar { justify-content: flex-start; }
   .badge { display: none; }

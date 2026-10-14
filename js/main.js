@@ -211,10 +211,11 @@ function buildGallery(p) {
     ? Array.from({ length: Math.ceil(p.images.length / p.cols) }, (_, r) => p.images.slice(r * p.cols, (r + 1) * p.cols).map((__, k) => r * p.cols + k))
     : p.rows ?? p.images.map((_, i) => [i]);
   const grid = el('div', { class: `p-rows${p.cols ? ' has-cols' : ''}`, ...(p.cols ? { style: `--cols: ${p.cols}` } : {}) });
-  rows.forEach((idx) => {
+  rows.forEach((idx, r) => {
     const imgs = idx.map((i) => p.images[i]);
     const hasCaps = imgs.some((im) => im[3]);
-    const row = el('div', { class: `p-row${hasCaps ? ' has-caps' : ''}${imgs.length === 1 && !p.cols ? ' is-solo' : ''}` });
+    const pair = imgs.length === 2 && (p.pairRows ?? []).includes(r);
+    const row = el('div', { class: `p-row${hasCaps ? ' has-caps' : ''}${imgs.length === 1 && !p.cols ? ' is-solo' : ''}${pair ? ' is-pair' : ''}` });
     imgs.forEach((image, k) => {
       const [season, detail] = (image[3] ?? '').split(' — ');
       const picture = img(image, `${p.title} — ${season || `image ${idx[k] + 1}`}`, idx[0] === 0);
