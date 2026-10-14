@@ -7,7 +7,7 @@
   --accent: #ff3b1f;
 
   --gutter: clamp(14px, 1.6vw, 26px);
-  --small: 11px;
+  --small: clamp(11px, 0.4vw + 6px, 14px);
   --track: 0.02em;
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -382,6 +382,15 @@ body.is-locked:not(.at-project-end) .filterbar { transform: translateY(100%); op
   .info-lead { grid-column: 1 / 13; }
   .info-col, .info-col:first-of-type { grid-column: span 6; }
 }
+
+/* tablets: caption rows of 3–4 pictures wrap to two per line */
+@media (min-width: 601px) and (max-width: 900px) {
+  .p-row.has-caps { flex-wrap: wrap; gap: 20px var(--gutter); }
+  .p-row.has-caps figure { flex: 1 1 calc(50% - var(--gutter)); }
+}
+
+/* phones in landscape: the fixed Paris badge would cover the content */
+@media (max-height: 500px) { .badge { display: none; } }
 
 @media (max-width: 600px) {
   .idx-grid { grid-template-columns: 1fr; }
