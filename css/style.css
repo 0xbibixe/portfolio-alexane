@@ -245,6 +245,8 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   line-height: 1.1;
 }
 /* highlighted words in a calligraphic script, set among the sans-serif */
+.info-lead .mail { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; overflow-wrap: anywhere; }
+.info-lead .mail:hover { opacity: 0.6; }
 .info-lead .script {
   font-family: 'Pinyon Script', 'Snell Roundhand', 'Brush Script MT', cursive;
   font-style: normal; font-weight: 400; font-stretch: 100%;
