@@ -84,6 +84,22 @@ h1, h2, h3, p { margin: 0; }
   position: absolute; z-index: 1;
   top: var(--gutter); left: var(--gutter); right: var(--gutter);
 }
+/* name set in her own display typography, centred on the first screen */
+.landing-name {
+  position: absolute; z-index: 1;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(62vw, 1000px);
+  display: block;
+}
+.landing-name img {
+  display: block; width: 100%; height: auto;
+  filter: drop-shadow(0 0 28px rgba(0, 0, 0, 0.35));
+  opacity: 0;
+  animation: nameIn 1.6s var(--ease) 0.15s forwards;
+}
+@keyframes nameIn { from { opacity: 0; transform: translateY(14px) scale(0.985); } to { opacity: 1; transform: none; } }
+@media (max-width: 600px) { .landing-name { width: 88vw; } }
 .landing-top .nav a { color: var(--fg); opacity: 0.7; transition: opacity 0.3s, color 0.3s; }
 .landing-top .nav a:hover, .landing-top .nav a.is-active { opacity: 1; }
 
