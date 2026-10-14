@@ -92,7 +92,8 @@ export const PROJECTS = [
     client: "Coperni",
     tag: "Creative Direction",
     cats: ['direction'],
-    rows: [[0], [1, 2, 3], [4, 5, 6], [7, 8], [9]],
+    rows: [[0], [1, 2, 3], [4, 5, 6], [7, 8], [9], [10, 11], [12, 13], [14, 15], [16, 17], [18, 19]],
+    pairRows: [5, 6, 7, 8, 9],  // duos stay side by side on phones too
     images: [
       ['images/fw25_a.jpg', 2800, 2099],
       ['images/fw25_b.jpg', 1867, 2800],
@@ -104,6 +105,16 @@ export const PROJECTS = [
       ['images/fw25_h.jpg', 1500, 2000],
       ['images/fw25_i.jpg', 2000, 1500],
       ['images/fw25_j.jpg', 2000, 1500],
+      ['images/fw25_duo_01.jpg', 2240, 2800],
+      ['images/fw25_duo_02.jpg', 2240, 2800],
+      ['images/fw25_duo_03.jpg', 2240, 2800],
+      ['images/fw25_duo_04.jpg', 2240, 2800],
+      ['images/fw25_duo_05.jpg', 2240, 2800],
+      ['images/fw25_duo_06.jpg', 2240, 2800],
+      ['images/fw25_duo_07.jpg', 2240, 2800],
+      ['images/fw25_duo_08.jpg', 2240, 2800],
+      ['images/fw25_duo_09.jpg', 2240, 2800],
+      ['images/fw25_duo_10.jpg', 2240, 2800],
     ],
     desc: "Coperni\nShot by Gorka Postigo\nMarketing Assets",
     credits: [
