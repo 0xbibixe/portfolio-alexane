@@ -157,7 +157,8 @@ function updateReel() {
     item.style.setProperty('--dim', (next * 0.5).toFixed(3));
     item.firstElementChild.style.transform = next > 0 ? `translate3d(0, ${(-next * 4).toFixed(3)}%, 0)` + ` scale(${(1 + next * 0.05).toFixed(4)})` : '';
     item.style.zIndex = String(j + 1);
-    item.style.pointerEvents = j === current ? 'auto' : 'none';
+    // every visible band is clickable (clip-path also clips hit-testing, so each one opens its own project)
+    item.style.pointerEvents = e > 0 && next < 1 ? 'auto' : 'none';
     item.tabIndex = j === current ? 0 : -1;
   });
 }
