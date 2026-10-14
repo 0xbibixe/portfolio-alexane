@@ -224,6 +224,7 @@ function buildGallery(p) {
       const picture = img(image, `${p.title} — ${season || `image ${idx[k] + 1}`}`, idx[0] === 0);
       const link = image[4];
       const film = image[5];   // HLS playlist of a film shown when the picture is clicked
+      const credits = image[6];   // detailed credits shown under the caption
       const fig = el('figure', { style: `--ar: ${(image[1] / image[2]).toFixed(4)}` }, [
         link ? el('a', { class: 'shoot-link', href: `#p/${link}`, 'aria-label': `${season || p.title} — voir tout le shooting` }, [picture])
           : film ? el('button', { class: 'video-link', type: 'button', 'data-film': film, 'aria-label': `${season || p.title} — lire le film` }, [picture, el('span', { class: 'play', 'aria-hidden': 'true', text: '▶' })])
@@ -236,6 +237,7 @@ function buildGallery(p) {
           ...(detail ? [el('br'), el('span', { class: 'mute', text: detail })] : []),
           ...(link ? [el('br'), el('a', { class: 'view-shoot', href: `#p/${link}`, text: 'View shoot →' })] : []),
           ...(film ? [el('br'), el('button', { class: 'view-shoot', type: 'button', 'data-film': film, text: 'Watch film →' })] : []),
+          ...(credits ? [el('span', { class: 'credits', text: credits })] : []),
         ]));
       }
       row.append(fig);

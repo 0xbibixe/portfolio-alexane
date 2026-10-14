@@ -177,7 +177,8 @@ export const PROJECTS = [
     cover: ['images/show_cover_lan.jpg', 2000, 1600],
     rows: [[0, 1, 2, 3]],
     images: [
-      ['images/show_fw23.jpg', 998, 1248, 'Coperni Fall Winter 23 Show — Boston Dynamics Robots choreography', null, 'video/fw23/playlist.txt'],
+      ['images/show_fw23.jpg', 998, 1248, 'Coperni Fall Winter 23 Show — Boston Dynamics Robots choreography', null, 'video/fw23/playlist.txt',
+        'Fall/Winter 2023 show at Palais de Chaillot. Styled by Helena Tejedor. Art Direction by Kevin Tekinel and Charles Levai. Casting by DM Casting. Music by u.r.trax. Choreography by Eric Cristonson. Video direction by Alexandre Silberstein. Hair by Duffy with L’Oréal. Make-up by Fara Homidi with La Mer. Production by La Mode en Images. Press by Lucien Pagès Communication. Spot® Boston Dynamics.'],
       ['images/show_ss25.jpg', 998, 1248, 'Coperni Spring Summer 25 Show — Disneyland Paris', null, 'video/ss25/playlist.txt'],
       ['images/show_fw25.jpg', 999, 1248, 'Coperni Fall Winter 25 Show — Gamers Lan Party contest', null, 'video/fw25/playlist.txt'],
       ['images/show_ss26.jpg', 998, 1248, 'Coperni Spring Summer 26 Show', null, 'video/ss26/playlist.txt'],

@@ -358,6 +358,7 @@ body.is-locked:not(.at-project-end) .filterbar { transform: translateY(100%); op
 .p-row img { width: 100%; height: auto; opacity: 0; transform: scale(1.04); transition: opacity 1s var(--ease), transform 1.6s var(--ease); background: #111; }
 .p-row img.is-seen { opacity: 1; transform: none; }
 .p-row figcaption { padding-top: 10px; font-size: var(--small); font-weight: 500; line-height: 1.35; text-transform: uppercase; }
+.p-row figcaption .credits { display: block; margin-top: 10px; max-width: 62ch; font-size: var(--small); font-weight: 400; line-height: 1.5; text-transform: none; color: var(--mute); }
 .p-row figcaption .mute { color: var(--mute); text-transform: none; }
 .shoot-link { display: block; overflow: hidden; }
 .shoot-link img { transition: opacity 1s var(--ease), transform 1.2s var(--ease), filter 0.4s; }
