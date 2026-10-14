@@ -153,7 +153,7 @@ export const PROJECTS = [
     client: "Coperni",
     tag: "Shooting — Production & Post-Production",
     cats: ['production'],
-    cover: ['images/brand_cover.jpg', 3000, 1875],
+    cover: ['images/brand_cover.jpg', 1890, 1063],
     rows: [[0, 1, 2, 3], [4, 5, 6, 7]],
     images: [
       ['images/brand_shooting_1.jpg', 863, 1079, '[1] Production — Pre Fall 23 shot by Pierre-Ange Carlotti', 'shoot-pre-fall-23'],
