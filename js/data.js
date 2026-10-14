@@ -265,7 +265,6 @@ export const SHOOTS = [
       ['images/shoot_prefall23_08.jpg', 1326, 2000],
       ['images/shoot_prefall23_09.jpg', 1326, 2000],
       ['images/shoot_prefall23_10.jpg', 1326, 2000],
-      ['images/shoot_prefall23_11.jpg', 1359, 2000],
       ['images/shoot_prefall23_12.jpg', 1326, 2000],
       ['images/shoot_prefall23_13.jpg', 1362, 2000],
     ],
