@@ -236,12 +236,23 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
 }
 .info-lead {
   grid-column: 1 / 10;
-  font-size: clamp(24px, 3.4vw, 54px);
   font-weight: 500;
   font-stretch: 85%;
   line-height: 1.04;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   text-indent: 3em;
+  text-transform: uppercase;
+  font-size: clamp(20px, 2.7vw, 44px);
+  line-height: 1.22;
+}
+/* highlighted words in a calligraphic script, set among the capitals */
+.info-lead .script {
+  font-family: 'Pinyon Script', 'Snell Roundhand', 'Brush Script MT', cursive;
+  font-weight: 400; font-stretch: 100%;
+  text-transform: none;
+  font-size: 1.75em; line-height: 0.7;
+  -webkit-text-stroke: 0.015em currentColor;
+  letter-spacing: 0;
 }
 .info-col { grid-column: span 3; }
 .info-col:first-of-type { grid-column: 1 / 4; }
