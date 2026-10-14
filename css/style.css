@@ -245,10 +245,11 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
 }
 /* highlighted words in a calligraphic script, set among the sans-serif */
 .info-lead .script {
-  font-family: 'Alex Brush', 'Snell Roundhand', 'Brush Script MT', cursive;
+  font-family: 'Pinyon Script', 'Snell Roundhand', 'Brush Script MT', cursive;
   font-style: normal; font-weight: 400; font-stretch: 100%;
-  font-size: 1.4em; line-height: 0.8;
-  letter-spacing: 0.01em;
+  font-size: 1.4em; line-height: 0.7;
+  -webkit-text-stroke: 0.015em currentColor;
+  letter-spacing: 0;
 }
 .info-col { grid-column: span 3; }
 .info-col:first-of-type { grid-column: 1 / 4; }
