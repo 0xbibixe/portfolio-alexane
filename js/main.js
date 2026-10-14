@@ -447,7 +447,7 @@ window.addEventListener('hashchange', lbClose);
 
 /* ── Landing: arrow scrolls to the index, UI chrome waits for it ── */
 const landing = $('#landing');
-document.querySelectorAll('.landing-wordmark, .landing .nav a').forEach((a) => a.addEventListener('click', (e) => {
+document.querySelectorAll('.landing-wordmark, .landing .nav a, .info-head .nav a').forEach((a) => a.addEventListener('click', (e) => {
   e.preventDefault();
   const target = a.dataset.view ?? HOME;
   if (target === HOME) { applyFilter('all'); setIndexMode('reel'); }
