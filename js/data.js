@@ -211,7 +211,7 @@ export const PROJECTS = [
     client: "Printemps Paris",
     tag: "Production, Set Design & Montage",
     cats: ['windows'],
-    cover: ['images/windows_display_cover.jpg', 1024, 768],
+    cover: ['images/windows_display_cover.jpg', 4096, 3072],
     rows: [[0, 1, 2, 3]],
     images: [
       ['images/windows_display_2.jpg', 998, 1248],
