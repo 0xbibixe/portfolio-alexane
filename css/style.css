@@ -452,12 +452,18 @@ body.lb-open { overflow: hidden; }
 .video-link { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; }
 .video-link .play {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-  width: 64px; height: 64px; border-radius: 50%;
-  display: grid; place-items: center; padding-left: 4px;
+  box-sizing: border-box; width: 64px; height: 64px; border-radius: 50%;
+  display: block; padding: 0; font-size: 0; line-height: 0;
   background: rgba(8, 8, 8, 0.55); color: var(--fg);
   -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 248, 239, 0.5);
-  font-size: 22px; transition: transform 0.4s var(--ease), background 0.3s;
+  transition: transform 0.4s var(--ease), background 0.3s;
+}
+.video-link .play::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  border-style: solid; border-width: 11px 0 11px 18px;
+  border-color: transparent transparent transparent currentColor;
+  transform: translate(-38%, -50%);
 }
 .video-link:hover .play { transform: translate(-50%, -50%) scale(1.1); background: rgba(8, 8, 8, 0.75); }
 .view-shoot[data-film] { background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; }
