@@ -243,12 +243,12 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   font-size: clamp(24px, 3.4vw, 54px);
   line-height: 1.1;
 }
-/* highlighted words in an italic serif, set among the sans-serif */
+/* highlighted words in a calligraphic script, set among the sans-serif */
 .info-lead .script {
-  font-family: 'Instrument Serif', 'Times New Roman', serif;
-  font-style: italic; font-weight: 400; font-stretch: 100%;
-  font-size: 1.12em; line-height: 1;
-  letter-spacing: 0;
+  font-family: 'Alex Brush', 'Snell Roundhand', 'Brush Script MT', cursive;
+  font-style: normal; font-weight: 400; font-stretch: 100%;
+  font-size: 1.4em; line-height: 0.8;
+  letter-spacing: 0.01em;
 }
 .info-col { grid-column: span 3; }
 .info-col:first-of-type { grid-column: 1 / 4; }
