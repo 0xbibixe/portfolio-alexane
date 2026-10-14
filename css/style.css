@@ -155,8 +155,9 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
 .view[hidden] { display: none; }
 
 /* ── INDEX ─────────────────────────────────────────────── */
-.view-index.is-reel .idx-grid { display: none; }
-.view-index.is-grid .reel-stage { display: none; }
+.view-index.is-grid .reel-track { display: none; }
+/* the mosaic of all projects closes the scroll of the All page */
+.view-index.is-reel .idx-grid { position: relative; z-index: 3; background: var(--bg); padding-top: clamp(40px, 8vh, 100px); }
 
 /* scroll-driven reel: full-screen covers stacked as layers */
 .reel-stage {

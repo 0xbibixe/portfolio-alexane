@@ -92,7 +92,8 @@ function renderIndex() {
       ]),
     );
   });
-  root.append(stage, grid);
+  // the reel's scroll runway lives in its own track, so the mosaic of all projects can follow it
+  root.append(el('div', { class: 'reel-track' }, [stage]), grid);
   setIndexMode('reel');
   phone.addEventListener('change', () => { fillReel(stage); layoutReel(); });
 }
@@ -122,11 +123,12 @@ function layoutReel() {
   const root = $('#view-index');
   const n = root.querySelectorAll('.reel-item').length;
   const stage = root.querySelector('.reel-stage');
+  const track = root.querySelector('.reel-track');
   if (state.indexMode === 'reel') {
     const units = reelUnits(n);
-    root.style.height = `${Math.round(stage.offsetHeight * (1 + units * REEL_STEP))}px`;
+    track.style.height = `${Math.round(stage.offsetHeight * (1 + units * REEL_STEP))}px`;
   } else {
-    root.style.height = '';
+    track.style.height = '';
   }
   updateReel();
 }
@@ -137,8 +139,9 @@ function updateReel() {
   if (root.hidden || state.indexMode !== 'reel') return;
   const items = [...root.querySelectorAll('.reel-item')];
   const stage = root.querySelector('.reel-stage');
-  const total = Math.max(1, root.offsetHeight - stage.offsetHeight);
-  const scrolled = -root.getBoundingClientRect().top;
+  const track = root.querySelector('.reel-track');
+  const total = Math.max(1, track.offsetHeight - stage.offsetHeight);
+  const scrolled = -track.getBoundingClientRect().top;
   const units = reelUnits(items.length);
   const progress = Math.min(1, Math.max(0, scrolled / total)) * units;
   const raw = (j) => (j <= 0 ? 1 : ease(Math.min(1, Math.max(0, (progress - (j - 1)) / reelSpan(j)))));
