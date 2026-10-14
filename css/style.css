@@ -74,6 +74,8 @@ h1, h2, h3, p { margin: 0; }
   transform: translateZ(0);
 }
 .landing-bg.is-active { opacity: 1; }
+/* wide screens show a horizontal slice: keep the faces (top of the picture) in it */
+@media (min-aspect-ratio: 1/1) { .landing-bg { object-position: 50% 20%; } }
 .landing::after {
   content: '';
   position: fixed; inset: 0;
@@ -174,6 +176,8 @@ main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh;
   will-change: clip-path;
 }
 .reel-item img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+/* wide screens crop top and bottom: favour the upper part, where faces usually are */
+@media (min-aspect-ratio: 1/1) { .reel-item img { object-position: 50% 30%; } }
 .reel-item::before {
   content: ''; position: absolute; inset: 0; z-index: 1;
   background: #000; opacity: var(--dim, 0);
