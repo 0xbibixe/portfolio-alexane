@@ -94,7 +94,6 @@ h1, h2, h3, p { margin: 0; }
 }
 .landing-name img {
   display: block; width: 100%; height: auto;
-  filter: drop-shadow(0 0 28px rgba(0, 0, 0, 0.35));
   opacity: 0;
   animation: nameIn 1.6s var(--ease) 0.15s forwards;
 }
@@ -150,9 +149,6 @@ body.on-landing:not(.is-locked) .filterbar { transform: none; opacity: 1; pointe
 main { position: relative; z-index: 2; background: var(--bg); min-height: 100vh; min-height: 100svh; }
 .view-info { padding: var(--gutter) var(--gutter) 140px; }
 .info-head { margin-bottom: clamp(60px, 12vh, 140px); }
-.info-name { display: block; width: min(50vw, 640px); margin: 0 auto clamp(8px, 2vh, 24px); }
-.info-name img { display: block; width: 100%; height: auto; opacity: 0; animation: nameIn 1.6s var(--ease) 0.1s forwards; }
-@media (max-width: 600px) { .info-name { width: 84vw; } }
 .info-head .header-row { padding-top: 10px; }
 .info-head .nav a { color: var(--fg); opacity: 0.7; transition: opacity 0.3s, color 0.3s; }
 .info-head .nav a:hover, .info-head .nav a.is-active { opacity: 1; }
