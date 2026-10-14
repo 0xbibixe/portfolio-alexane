@@ -37,11 +37,12 @@ export const PROJECTS = [
     client: "Beau Magazine",
     tag: "Creative Direction & 3D Render",
     cats: ['direction', '3d'],
-    rows: [[0], [1, 2]],
+    rows: [[0], [1, 2], [3]],
     images: [
       ['images/beau_magazine.jpg', 1756, 1080],
       ['images/beau_magazine_2.jpg', 1280, 1600],
       ['images/beau_magazine_3.jpg', 1280, 1600],
+      ['images/beau_magazine_4.jpg', 2000, 1333],
     ],
     desc: "Merging photography with CGI\nUsing digital set design in open sources\n\nConcept input: How do we make the fashion image sustainable?\nBy canceling production, and the systems surrounding it, we create a set design that remains, shared as open source.",
     credits: [
