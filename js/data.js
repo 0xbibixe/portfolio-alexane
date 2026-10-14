@@ -231,7 +231,7 @@ export const PROJECTS = [
     rows: [[0], [1, 2], [3, 4], [5, 6, 7, 8]],
     pairRows: [1],  // rows kept side by side on phones too
     images: [
-      ['images/print_aiprint_01.jpg', 1758, 1080],
+      ['images/print_aiprint_01.jpg', 4096, 2516],
       ['images/print_aiprint_04.jpg', 2000, 1000],
       ['images/print_aiprint_05.jpg', 2000, 1000],
       ['images/print_look30.jpg', 960, 1440, "[1] — Coperni Fall Winter 23 Show - Look 30"],
