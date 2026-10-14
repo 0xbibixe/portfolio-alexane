@@ -92,12 +92,14 @@ h1, h2, h3, p { margin: 0; }
   width: min(62vw, 1000px);
   display: block;
 }
+.landing-name { opacity: 0; animation: nameIn 1.6s var(--ease) 0.15s forwards; }
 .landing-name img {
   display: block; width: 100%; height: auto;
-  opacity: 0;
-  animation: nameIn 1.6s var(--ease) 0.15s forwards;
+  transition: opacity 0.7s var(--ease);
 }
-@keyframes nameIn { from { opacity: 0; transform: translateY(14px) scale(0.985); } to { opacity: 1; transform: none; } }
+/* the name melts away while the cursor is on it, to leave the picture clear */
+@media (hover: hover) { .landing-name:hover img { opacity: 0; } }
+@keyframes nameIn { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
 @media (max-width: 600px) { .landing-name { width: 88vw; } }
 .landing-top .nav a { color: var(--fg); opacity: 0.7; transition: opacity 0.3s, color 0.3s; }
 .landing-top .nav a:hover, .landing-top .nav a.is-active { opacity: 1; }
