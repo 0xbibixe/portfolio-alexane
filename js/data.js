@@ -178,7 +178,7 @@ export const PROJECTS = [
     rows: [[0, 1, 2, 3]],
     images: [
       ['images/show_fw23.jpg', 998, 1248, 'Coperni Fall Winter 23 Show — Boston Dynamics Robots choreography', null, 'video/fw23/playlist.txt',
-        'Fall/Winter 2023 show at Palais de Chaillot. Styled by Helena Tejedor. Art Direction by Kevin Tekinel and Charles Levai. Casting by DM Casting. Music by u.r.trax. Choreography by Eric Cristonson. Video direction by Alexandre Silberstein. Hair by Duffy with L’Oréal. Make-up by Fara Homidi with La Mer. Production by La Mode en Images. Press by Lucien Pagès Communication. Spot® Boston Dynamics.'],
+        'Fall/Winter 2023 show at Palais de Chaillot. Styled by Helena Tejedor. Creative Direction by Kevin Tekinel & Charles Levai. Casting by DM Casting. Music by u.r.trax. Choreography by Eric Cristonson. Video direction by Alexandre Silberstein. Hair by Duffy with L’Oréal. Make-up by Fara Homidi with La Mer. Production by La Mode en Images. Press by Lucien Pagès Communication. Spot® Boston Dynamics.'],
       ['images/show_ss25.jpg', 998, 1248, 'Coperni Spring Summer 25 Show — Disneyland Paris', null, 'video/ss25/playlist.txt',
         'Spring/Summer 2025 show at Disneyland Paris. Styled by Helena Tejedor. Creative Direction by Kevin Tekinel and Charles Levai. Casting by Samuel Ellis Scheinman. Music by u.r.trax. Show Film by Fantastic Studio. Hair by Duffy with L’Oréal. Make-up by Pat McGrath with Pat McGrath Labs. Skincare by IS Clinical. Production by La Mode en Images. Cars Peugeot. Transport Uber. Press by Lucien Pagès Communication. Crystal Bag by Swarovski.'],
       ['images/show_fw25.jpg', 999, 1248, 'Coperni Fall Winter 25 Show — Gamers Lan Party contest', null, 'video/fw25/playlist.txt',
