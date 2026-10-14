@@ -61,6 +61,7 @@ function fillReel(stage) {
           el('span', { class: 'num', text: pad(i) }),
           el('span', {}, [
             el('span', { class: 't', text: p.title }),
+            ...(p.homeNote ? [el('span', { class: 'sub', text: ` — ${p.homeNote}` })] : []),
             el('br'),
             el('span', { class: 'sub', text: p.tag }),
           ]),
@@ -81,6 +82,7 @@ function renderIndex() {
       el('span', { class: 'num', text: pad(i) }),
       el('span', {}, [
         el('span', { class: 't', text: p.title }),
+            ...(p.homeNote ? [el('span', { class: 'sub', text: ` — ${p.homeNote}` })] : []),
         el('br'),
         el('span', { class: 'sub', text: p.tag }),
       ]),
