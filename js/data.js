@@ -212,7 +212,7 @@ export const PROJECTS = [
   {
     slug: 'windows-display',
     title: "Windows Display",
-    client: "Printemps Paris",
+    client: "Printemps Paris — Printemps Haussmann",
     tag: "Production, Set Design & Montage",
     cats: ['windows'],
     cover: ['images/windows_display_cover.jpg', 4096, 3072],
