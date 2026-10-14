@@ -470,14 +470,12 @@ const loadHls = () => new Promise((ok, fail) => {
 async function filmOpen(src) {
   filmbox.hidden = false;
   document.body.classList.add('lb-open');
-  if (filmEl.canPlayType('application/vnd.apple.mpegurl')) {
-    filmEl.src = src;
-  } else {
-    try {
-      const Hls = await loadHls();
-      if (Hls.isSupported()) { hls = new Hls(); hls.loadSource(src); hls.attachMedia(filmEl); }
-    } catch { /* offline: the controls stay empty */ }
-  }
+  let done = false;
+  try {
+    const Hls = await loadHls();
+    if (Hls.isSupported()) { hls = new Hls(); hls.loadSource(src); hls.attachMedia(filmEl); done = true; }
+  } catch { /* offline or blocked: try the browser's own HLS player */ }
+  if (!done) filmEl.src = src;
   filmEl.play().catch(() => {});
 }
 function filmClose() {
