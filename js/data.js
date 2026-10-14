@@ -404,7 +404,7 @@ export const SHOOTS = [
       ['images/shoot_lukasz_05.jpg', 1600, 2000],
       ['images/shoot_lukasz_06.jpg', 1600, 2000],
       ['images/shoot_lukasz_07.jpg', 1600, 2000],
-      ['images/shoot_lukasz_08.jpg', 2000, 1369],
+      ['images/shoot_lukasz_08.jpg', 1600, 2000],
       ['images/shoot_lukasz_09.jpg', 1600, 2000],
       ['images/shoot_lukasz_10.jpg', 1600, 2000],
       ['images/shoot_lukasz_11.jpg', 1600, 2000],
