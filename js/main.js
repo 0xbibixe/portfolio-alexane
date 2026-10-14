@@ -56,7 +56,7 @@ function fillReel(stage) {
     if (phone.matches && !mobile) return;
     stage.append(
       el('a', { class: 'reel-item', href: `#p/${p.slug}`, 'aria-label': p.title }, [
-        img(mobile ?? p.cover ?? p.images[0], p.title, true),
+        img(mobile ?? p.reelCover ?? p.cover ?? p.images[0], p.title, true),
         el('div', { class: 'reel-cap' }, [
           el('span', { class: 'num', text: pad(i) }),
           el('span', {}, [
