@@ -330,7 +330,7 @@ function closeProject() {
   if (overlay.hidden) return;
   overlay.classList.remove('is-open');
   document.body.classList.remove('is-locked', 'at-project-end');
-  document.title = 'Alexane Vitte — Image Maker & Creative Director';
+  document.title = 'Alexane Vitte';
   // transitionend is unreliable here (bubbling child transitions, background tabs)
   clearTimeout(closeTimer);
   closeTimer = setTimeout(() => {
